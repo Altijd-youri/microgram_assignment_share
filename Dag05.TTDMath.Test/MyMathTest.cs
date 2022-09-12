@@ -83,4 +83,97 @@ public class MyMathTest
         var exception = Assert.ThrowsException<ArgumentException>(act);
         Assert.AreEqual("Cannot calculate Fac(-1)", exception.Message);
     }
+
+    [TestMethod]
+    public void Fib_1_returns1()
+    {
+        // Arrange
+        MyMath sut = new MyMath();
+        int n = 1;
+        
+        // Act
+        int result = sut.Fib(n);
+
+        // Assert
+        Assert.AreEqual(1, result);
+    }
+    
+    [TestMethod]
+    public void Fib_2_returns1()
+    {
+        // Arrange
+        MyMath sut = new MyMath();
+        int n = 2;
+        
+        // Act
+        int result = sut.Fib(n);
+
+        // Assert
+        Assert.AreEqual(1, result);
+    }
+    
+    [TestMethod]
+    public void Fib_3_returns2()
+    {
+        // Arrange
+        MyMath sut = new MyMath();
+        int n = 3;
+        
+        // Act
+        int result = sut.Fib(n);
+
+        // Assert
+        Assert.AreEqual(2, result);
+    }
+    
+    [TestMethod]
+    public void Fib_4_returns3()
+    {
+        // Arrange
+        MyMath sut = new MyMath();
+        int n = 4;
+        
+        // Act
+        int result = sut.Fib(n);
+        // Assert
+        Assert.AreEqual(3, result);
+    }
+
+    [TestMethod]
+    public void Fib_0_throwsArgumentException()
+    {
+        // Arrange
+        MyMath sut = new MyMath();
+        int n = 0;
+
+        // Act
+        Action act = () =>
+        {
+            int result = sut.Fib(n);
+        };
+       
+        
+        // Assert
+        var exception = Assert.ThrowsException<ArgumentException>(act);
+        Assert.AreEqual("Cannot calculate Fib(0)", exception.Message);
+    }
+    
+    [TestMethod]
+    public void Fib_LessThan0_throwsArgumentException()
+    {
+        // Arrange
+        MyMath sut = new MyMath();
+        int n = -1;
+
+        // Act
+        Action act = () =>
+        {
+            int result = sut.Fib(n);
+        };
+       
+        
+        // Assert
+        var exception = Assert.ThrowsException<ArgumentException>(act);
+        Assert.AreEqual("Cannot calculate Fib(-1)", exception.Message);
+    }
 }

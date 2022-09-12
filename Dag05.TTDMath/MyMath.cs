@@ -8,4 +8,20 @@ public class MyMath
         1 => 1,
         _ => n * Fac(n - 1)
     };
+
+    public int Fib(int n)
+    {
+        if (n <= 0)
+        {
+            throw new ArgumentException($"Cannot calculate Fib({n})");
+        }
+        if (n <= 2)
+        {
+            return 1;
+        }
+        else
+        {
+            return Fib(n - 1) + Fib(n - 2);
+        }
+    }
 }
