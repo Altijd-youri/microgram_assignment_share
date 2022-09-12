@@ -170,8 +170,7 @@ public class MyMathTest
         {
             int result = sut.Fib(n);
         };
-       
-        
+
         // Assert
         var exception = Assert.ThrowsException<ArgumentException>(act);
         Assert.AreEqual("Cannot calculate Fib(-1)", exception.Message);
