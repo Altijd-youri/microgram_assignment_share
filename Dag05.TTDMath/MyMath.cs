@@ -12,7 +12,23 @@ public class MyMath
     public int Fib(int n) => n switch
     {
         <= 0 => throw new ArgumentException($"Cannot calculate Fib({n})"),
-        <= 2 => 2,
+        <= 2 => 1,
         _ => Fib(n - 1) + Fib(n - 2)
     };
+
+    public double XisX1(double x)
+    {
+        return x + 1;
+    }
+
+    public double find(double stop)
+    {
+        double current = 0;
+        while (current < stop)
+        {
+            current = current - double.MinValue;
+        }
+
+        return current;
+    }
 }

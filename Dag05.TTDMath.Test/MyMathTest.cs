@@ -175,4 +175,37 @@ public class MyMathTest
         var exception = Assert.ThrowsException<ArgumentException>(act);
         Assert.AreEqual("Cannot calculate Fib(-1)", exception.Message);
     }
+
+    public void XisX1_1_returnsTrue(double expected, double x)
+    {
+        
+    }
+
+    [TestMethod]
+    public void XisX1_1_returnsTrue()
+    {
+        // Arrange
+        MyMath sut = new();
+        double x = 1;
+        
+        // Act
+        double result = sut.XisX1(x);
+
+        // Assert
+        Assert.AreEqual(x, result);
+    }
+    
+    [TestMethod]
+    public void find()
+    {
+        // Arrange
+        MyMath sut = new();
+        double x = 1;
+        
+        // Act
+        double result = sut.XisX1(x);
+
+        // Assert
+        Assert.AreEqual(x, result);
+    }
 }
