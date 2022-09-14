@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Dag07.Munten;
+﻿namespace Dag07.Munten;
 
 public struct Valuta
 {
@@ -24,5 +22,35 @@ public struct Valuta
     public override string ToString()
     {
         return $"{Bedrag:N2} {Muntsoort.afkortingRepresentatie()}";
+    }
+
+    public static Valuta operator +(Valuta a, Valuta b)
+    {
+        if (a.Muntsoort != b.Muntsoort)
+            b = b.ConvertTo(a.Muntsoort);
+        return new Valuta(a.Bedrag + b.Bedrag, a.Muntsoort);
+    }
+    
+    public static Valuta operator *(Valuta a, Valuta b)
+    {
+        if (a.Muntsoort != b.Muntsoort)
+            b = b.ConvertTo(a.Muntsoort);
+        return new Valuta(a.Bedrag * b.Bedrag, a.Muntsoort);
+    }
+
+    private static bool IsEqual(Valuta a, Valuta b)
+    {
+        if (a.Muntsoort != b.Muntsoort)
+            b = b.ConvertTo(a.Muntsoort);
+        return a.Bedrag == b.Bedrag;
+    }
+    public static bool operator ==(Valuta a, Valuta b) => IsEqual(a, b);
+    
+    public static bool operator !=(Valuta a, Valuta b) => !IsEqual(a, b);
+
+    public static implicit operator Valuta(decimal a) => new Valuta(a, Muntsoort.Euro);
+    public static implicit operator decimal(Valuta a)
+    {
+        return a.ConvertTo(Muntsoort.Euro).Bedrag;
     }
 }
