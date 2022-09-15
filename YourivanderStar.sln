@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dag07.Munten.Test", "Dag07.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dag07.Munten", "Dag07.Munten\Dag07.Munten.csproj", "{223E1DE8-BED2-422E-80BB-54C608A6DC5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dag08.PatternMatching.Test", "Dag08.PatternMatching.Test\Dag08.PatternMatching.Test.csproj", "{718C3F1D-5EBD-43E3-9987-BDBC9D41ADBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dag08.PatternMatching", "Dag08.PatternMatching\Dag08.PatternMatching.csproj", "{D72A1D3E-64E6-4CF8-8643-D7476DAFDE0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +52,13 @@ Global
 		{223E1DE8-BED2-422E-80BB-54C608A6DC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{223E1DE8-BED2-422E-80BB-54C608A6DC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{223E1DE8-BED2-422E-80BB-54C608A6DC5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718C3F1D-5EBD-43E3-9987-BDBC9D41ADBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718C3F1D-5EBD-43E3-9987-BDBC9D41ADBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718C3F1D-5EBD-43E3-9987-BDBC9D41ADBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718C3F1D-5EBD-43E3-9987-BDBC9D41ADBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72A1D3E-64E6-4CF8-8643-D7476DAFDE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72A1D3E-64E6-4CF8-8643-D7476DAFDE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72A1D3E-64E6-4CF8-8643-D7476DAFDE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72A1D3E-64E6-4CF8-8643-D7476DAFDE0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
