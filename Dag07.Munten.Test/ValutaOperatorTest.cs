@@ -36,6 +36,36 @@ public class ValutaOperatorTest
     }
     
     [TestMethod]
+    public void Valuta_multiplyOperator_WithRightDecimal()
+    {
+        // Arrange
+        Valuta a = new Valuta(2M, Muntsoort.Gulden);
+        decimal b = 2;
+
+        // Act
+        Valuta result = a * b;
+
+        // Assert
+        Assert.AreEqual(4M, result.Bedrag);
+        Assert.AreEqual(Muntsoort.Gulden, result.Muntsoort);
+    }
+    
+    [TestMethod]
+    public void Valuta_multiplyOperator_WithLeftDecimal()
+    {
+        // Arrange
+        decimal a = 2;
+        Valuta b = new Valuta(2M, Muntsoort.Gulden);
+
+        // Act
+        Valuta result = a * b;
+
+        // Assert
+        Assert.AreEqual(4M, result.Bedrag);
+        Assert.AreEqual(Muntsoort.Gulden, result.Muntsoort);
+    }
+    
+    [TestMethod]
     public void Valuta_isEqualOperator_WithRightConversion()
     {
         // Arrange

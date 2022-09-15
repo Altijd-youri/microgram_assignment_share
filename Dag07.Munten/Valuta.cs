@@ -38,6 +38,9 @@ public struct Valuta
         return new Valuta(a.Bedrag * b.Bedrag, a.Muntsoort);
     }
 
+    public static Valuta operator *(decimal b, Valuta a) => a * b;
+    public static Valuta operator *(Valuta a, decimal b) => new (a.Bedrag * b, a.Muntsoort);
+
     private static bool IsEqual(Valuta a, Valuta b)
     {
         if (a.Muntsoort != b.Muntsoort)
