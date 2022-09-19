@@ -20,12 +20,15 @@ public class WerknemerTest
     }
     
     [TestMethod]
-    public void Werknemer_SalarisIncreasesBy1PercentForEachVerjaarMoment()
+    public void Werknemer_SalarisIncreasesBy1PercentForEachVerjaar_BeforeOnLeeftijdChangeEvent()
     {
         Werknemer sut = new Werknemer("John Doe", 50, 1000.00M);
+        SalarisChangedInTimeListener listener = new ();
+        sut.LeeftijdChanged += listener.Handle;
 
         sut.Verjaar();
         
+        Assert.AreEqual(1010M, listener.SalarisOnEvent);
         Assert.AreEqual(1010M, sut.Salaris);
     }
 }
