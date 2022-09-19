@@ -23,7 +23,7 @@ public class Persoon
         Leeftijd = leeftijd;
     }
 
-    public void Verjaar()
+    public virtual void Verjaar()
     {
         Leeftijd++;
     }
