@@ -4,12 +4,14 @@ public class LeeftijdChangedListener
 {
     public bool HasBeenCalled;
     public LeeftijdChangedEventArgs? Args;
-    public object? Sender;
+    public Persoon? Sender;
+    public string? Naam;
         
-    public void Handle(object? sender, LeeftijdChangedEventArgs? args)
+    public virtual void Handle(object? sender, LeeftijdChangedEventArgs? args)
     {
         HasBeenCalled = true;
-        Sender = sender;
+        Sender = (Persoon) sender!;
         Args = args;
+        Naam = Sender.Naam;
     }
 }

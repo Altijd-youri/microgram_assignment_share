@@ -12,7 +12,7 @@ public class Persoon
         {
             int oudeLeeftijd = _leeftijd;
             _leeftijd = value;
-            OnLeeftijdChanged(new LeeftijdChangedEventArgs(Leeftijd, oudeLeeftijd, Naam));
+            OnLeeftijdChanged(new LeeftijdChangedEventArgs(Leeftijd, oudeLeeftijd));
         }
     }
     public string Naam { get; }

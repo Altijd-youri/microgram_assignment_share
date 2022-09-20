@@ -60,8 +60,8 @@ public class PersoonTest
         
         sut.Verjaar();
         
+        Assert.AreEqual("John Doe", listener.Naam);
         Assert.AreEqual(51, listener.Args?.Leeftijd);
-        Assert.AreEqual("John Doe", listener.Args?.Naam);
         Assert.AreEqual(50, listener.Args?.OudeLeeftijd);
     }
     

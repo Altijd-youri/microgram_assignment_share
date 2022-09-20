@@ -8,11 +8,21 @@ public class Werknemer : Persoon
     {
         Salaris = salaris;
     }
-
-    public override void Verjaar()
+    private decimal VerhoogSalaris(int aantalJaren)
     {
-        Salaris *= 1.01M;
-        base.Verjaar();
+        if (aantalJaren > 0)
+        {
+            aantalJaren--;
+            Salaris = Decimal.Round(Salaris * 1.01M, 2);
+            return VerhoogSalaris(aantalJaren);
+        }
+        return Salaris;
     }
-    
+
+    protected override void OnLeeftijdChanged(LeeftijdChangedEventArgs e)
+    {
+        int change = e.Leeftijd - e.OudeLeeftijd;
+        VerhoogSalaris(change);
+        base.OnLeeftijdChanged(e);
+    }
 }
