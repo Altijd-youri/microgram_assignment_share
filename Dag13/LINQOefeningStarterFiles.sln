@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQOefening.DataLayer", "LINQOefening.DataLayer\LINQOefening.DataLayer.csproj", "{A0E40033-6A4B-4600-B20D-8E69B50352CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQOefening.ConsoleApp", "LINQOefening.ConsoleApp\LINQOefening.ConsoleApp.csproj", "{528111F1-EE3A-4F30-8955-D1707F9B90FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0E40033-6A4B-4600-B20D-8E69B50352CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E40033-6A4B-4600-B20D-8E69B50352CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E40033-6A4B-4600-B20D-8E69B50352CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E40033-6A4B-4600-B20D-8E69B50352CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528111F1-EE3A-4F30-8955-D1707F9B90FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528111F1-EE3A-4F30-8955-D1707F9B90FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528111F1-EE3A-4F30-8955-D1707F9B90FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528111F1-EE3A-4F30-8955-D1707F9B90FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67366774-FD5E-4366-9AB3-C8BF9D1B2E0C}
+	EndGlobalSection
+EndGlobal
