@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystemCleaner.Test", "FileSystemCleaner.Test\FileSystemCleaner.Test.csproj", "{5CD633B2-F943-49C7-909E-F93A0A4A1779}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSystemCleaner", "FileSystemCleaner\FileSystemCleaner.csproj", "{3A857550-BBF9-44D2-88E6-B5AC06090916}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CD633B2-F943-49C7-909E-F93A0A4A1779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD633B2-F943-49C7-909E-F93A0A4A1779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD633B2-F943-49C7-909E-F93A0A4A1779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD633B2-F943-49C7-909E-F93A0A4A1779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A857550-BBF9-44D2-88E6-B5AC06090916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A857550-BBF9-44D2-88E6-B5AC06090916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A857550-BBF9-44D2-88E6-B5AC06090916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A857550-BBF9-44D2-88E6-B5AC06090916}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
