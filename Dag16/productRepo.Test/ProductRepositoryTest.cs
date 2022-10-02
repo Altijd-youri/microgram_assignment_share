@@ -113,4 +113,25 @@ public class ProductRepositoryTest
         Assert.AreEqual(1, numberOfProducts);
         Assert.IsTrue(firstProduct.Prijs == 5.99M && firstProduct.Id == 102 && firstProduct.Naam == "Edam Cheese");
     }
+    
+    [TestMethod]
+    public void UpdateProduct_updatesProduct_ToDatabase()
+    {
+        using (var context = new ProductContext(_options))
+        {
+            Product[] products =
+            {
+                new (110, "Gouda Cheese", 6.69M),
+            };
+            context.Products.AddRange(products);
+            context.SaveChanges();
+        }
+        var sut = new ProductRepository(_options);
+        Product productToUpdate = new(110, "Gouda Cheese 48%", 7.70M);
+
+        sut.UpdateProduct(productToUpdate);
+
+        Product result = sut.FindProduct(110);
+        Assert.IsTrue(result.Prijs == 7.70M && result.Id == 110 && result.Naam == "Gouda Cheese 48%");
+    }
 }

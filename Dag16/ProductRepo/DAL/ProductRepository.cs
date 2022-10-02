@@ -38,4 +38,11 @@ public class ProductRepository
         context.Products.Add(productToCreate);
         context.SaveChanges();
     }
+
+    public void UpdateProduct(Product productToUpdate)
+    {
+        using var context = new ProductContext(_options);
+        context.Products.Update(productToUpdate);
+        context.SaveChanges();
+    }
 }

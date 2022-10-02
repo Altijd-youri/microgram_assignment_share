@@ -12,4 +12,6 @@ public class Product
     public long Id;
     public string Naam;
     public decimal Prijs;
+    // TODO: Link to Category   *--1
+    // TODO Link to vendor      *--1
 }

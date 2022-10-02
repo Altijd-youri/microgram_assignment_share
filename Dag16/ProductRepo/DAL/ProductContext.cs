@@ -13,7 +13,9 @@ public class ProductContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new ProductMapping());  
+        modelBuilder.ApplyConfiguration(new ProductMapping());
+        // TODO: Category mapping
+        // TODO: Vendor mapping
         
         base.OnModelCreating(modelBuilder);
     }
