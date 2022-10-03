@@ -1,0 +1,50 @@
+@model OrderWebsite.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <table>
+        <tr>
+            <th colspan="3">Order @Html.DisplayFor(model => model.Ordernummer) - (@Html.DisplayFor(model => model.Datum))</th>
+        </tr>
+        <tr>
+            <th>Product</th>
+            <th>Aantal</th>
+            <th>Rij totaal</th>
+        </tr>
+        @foreach (var orderRow in Model.OrderRows)
+        {
+            <tr>
+                <td>
+                    @orderRow.Product.Naam
+                </td>
+                <td>
+                    @orderRow.Aantal
+                </td>
+                <td>
+                    @orderRow.getRijTotaal()
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td>
+                Totaal:
+            </td>
+            <td>
+                @Model.GetOrderTotaal()
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
