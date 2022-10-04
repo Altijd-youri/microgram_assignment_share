@@ -1,13 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
+using OrderWebsite.Agents;
 using OrderWebsite.Models;
 
 namespace OrderWebsite.Controllers
 {
     public class OrderController : Controller
     {
+        private readonly IOrderAgent _orderAgent;
+
+        public OrderController(IOrderAgent orderAgent)
+        {
+            _orderAgent = orderAgent;
+        }
+
         public IActionResult Index()
         {
-            IEnumerable<Order> model = new List<Order>();
+            IEnumerable<Order> model = _orderAgent.GetOrderList();
             return View(model);
         }
 
@@ -24,9 +32,9 @@ namespace OrderWebsite.Controllers
             return View(order);
         }
         
-        public IActionResult Edit()
+        public IActionResult Edit(long id)
         {
-            Order model = new Order(new DateTime(), 101); // TODO: call agent
+            Order model = _orderAgent.GetOrder(id);
             return View(model);
         }
         
@@ -37,9 +45,9 @@ namespace OrderWebsite.Controllers
             return View(order);
         }
         
-        public IActionResult Delete()
+        public IActionResult Delete(long id)
         {
-            Order model = new Order(new DateTime(), 101); // TODO: call agent
+            Order model = _orderAgent.GetOrder(id);
             return View(model);
         }
         
@@ -51,9 +59,9 @@ namespace OrderWebsite.Controllers
             return View(model);
         }
         
-        public IActionResult Details()
+        public IActionResult Details(long id)
         {
-            Order model = new Order(new DateTime(), 111); // TODO: call agent
+            Order model = _orderAgent.GetOrder(id);
             return View(model);
         }
     }

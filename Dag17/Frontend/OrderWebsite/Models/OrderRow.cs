@@ -2,9 +2,9 @@ namespace OrderWebsite.Models;
 
 public class OrderRow
 {
-    public long Id { get; set; }
-    public Product Product { get; set; }
-    public int Aantal { get; set; }
+    public long Id { get; }
+    public Product Product { get; }
+    public int Aantal { get; }
 
     public OrderRow()
     {

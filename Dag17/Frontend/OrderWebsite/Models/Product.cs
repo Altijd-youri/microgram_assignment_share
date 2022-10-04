@@ -2,9 +2,9 @@ namespace OrderWebsite.Models;
 
 public class Product
 {
-    public long id { get; set; }
-    public string Naam { get; set; }
-    public decimal Prijs { get; set; }
+    public long id { get; }
+    public string Naam { get; }
+    public decimal Prijs { get; }
 
     public Product()
     {

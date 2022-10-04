@@ -4,10 +4,10 @@ namespace OrderWebsite.Models;
 
 public class Order
 {
-    public long Ordernummer { get; set; }
+    public long Ordernummer { get; }
     [DataType(DataType.Date)]
-    public DateTime Datum { get; set; }
-    public List<OrderRow> OrderRows { get; set; } = new ();
+    public DateTime Datum { get; }
+    public List<OrderRow> OrderRows { get; set; }
 
     public Order()
     {
@@ -17,6 +17,7 @@ public class Order
     {
         Datum = datum;
         Ordernummer = ordernummer;
+        OrderRows = new List<OrderRow>();
     }
 
     public decimal GetOrderTotaal()
