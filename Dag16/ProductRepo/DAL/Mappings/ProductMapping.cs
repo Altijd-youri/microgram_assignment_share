@@ -12,7 +12,6 @@ public class ProductMapping : IEntityTypeConfiguration<Product>
             .HasMaxLength(255);
         builder.Property(p => p.Prijs)
             .HasPrecision(2,2);
-        // TODO: Link to category
-        // TODO: Link to vendor
+        builder.HasOne(p => p.Category);
     }
 }

@@ -2,16 +2,21 @@
 
 public class Product
 {
-    public Product(long id, string naam, decimal prijs)
+    public long Id;
+    public string Naam;
+    public decimal Prijs;
+
+    public Category Category;
+
+    public Product()
+    {
+    }
+
+    public Product(long id, string naam, decimal prijs, Category category)
     {
         Id = id;
         Naam = naam;
         Prijs = prijs;
+        Category = category;
     }
-
-    public long Id;
-    public string Naam;
-    public decimal Prijs;
-    // TODO: Link to Category   *--1
-    // TODO Link to vendor      *--1
 }

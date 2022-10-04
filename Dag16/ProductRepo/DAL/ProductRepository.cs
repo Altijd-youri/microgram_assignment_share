@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ProductRepo.DAL;
 
-namespace ProductRepo;
+namespace ProductRepo.DAL;
 
 public class ProductRepository
 {
