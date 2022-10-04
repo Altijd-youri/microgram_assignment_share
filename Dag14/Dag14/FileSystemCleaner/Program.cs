@@ -6,7 +6,7 @@ Console.Write("Enter path to clean:");
 string? path = Console.ReadLine();
 
 Console.WriteLine();
-if (path !=  null)
+if (!string.IsNullOrWhiteSpace(path))
 {
     Console.WriteLine("Found the following files and directories:");
     foreach (CleanerListing item in fileCleaner.Report(path))
