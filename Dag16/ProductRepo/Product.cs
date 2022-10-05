@@ -2,11 +2,11 @@
 
 public class Product
 {
-    public long Id;
-    public string Naam;
-    public decimal Prijs;
+    public long Id  { get; set; }
+    public string Naam  { get; set; }
+    public decimal Prijs  { get; set; }
 
-    public Category Category;
+    public Category Category { get; set; }
 
     public Product()
     {

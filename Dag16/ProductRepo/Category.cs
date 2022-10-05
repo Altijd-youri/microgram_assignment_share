@@ -5,6 +5,8 @@ public class Category
     public long Id { get; }
     public string Naam { get;  }
 
+    public IEnumerable<Product> Products { get; set; } = new List<Product>();
+
     public Category()
     {
     }

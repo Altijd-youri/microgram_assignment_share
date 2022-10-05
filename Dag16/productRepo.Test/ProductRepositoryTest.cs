@@ -11,7 +11,7 @@ public class ProductRepositoryTest
     private SqliteConnection _connection;
     private DbContextOptions<ProductContext> _options;
 
-    private Category defaultCategory = new Category(200, "Cheese");
+    private readonly Category _defaultCategory = new Category(200, "Cheese");
     
     [TestInitialize]
     public void TestInitialize()
@@ -21,6 +21,7 @@ public class ProductRepositoryTest
 
         _options = new DbContextOptionsBuilder<ProductContext>()
             .UseSqlite(_connection)
+            .LogTo(Console.WriteLine)
             .Options;
 
         using (var context = new ProductContext(_options))
@@ -42,8 +43,8 @@ public class ProductRepositoryTest
         {
             Product[] products =
             {
-                new (101, "Edam Cheese", 4.20M, defaultCategory),
-                new (110, "Gouda Cheese", 6.69M, defaultCategory),
+                new (101, "Edam Cheese", 4.20M, _defaultCategory),
+                new (110, "Gouda Cheese", 6.69M, _defaultCategory),
             };
             context.Products.AddRange(products);
             context.SaveChanges();
@@ -64,8 +65,8 @@ public class ProductRepositoryTest
         {
             Product[] products =
             {
-                new (101, "Edam Cheese", 4.20M, defaultCategory),
-                new (110, "Gouda Cheese", 6.69M, defaultCategory),
+                new (101, "Edam Cheese", 4.20M, _defaultCategory),
+                new (110, "Gouda Cheese", 6.69M, _defaultCategory),
             };
             context.Products.AddRange(products);
             context.SaveChanges();
@@ -84,8 +85,8 @@ public class ProductRepositoryTest
         {
             Product[] products =
             {
-                new (101, "Edam Cheese", 4.20M, defaultCategory),
-                new (110, "Gouda Cheese", 6.69M, defaultCategory),
+                new (101, "Edam Cheese", 4.20M, _defaultCategory),
+                new (110, "Gouda Cheese", 6.69M, _defaultCategory),
             };
             context.Products.AddRange(products);
             context.SaveChanges();
@@ -105,7 +106,7 @@ public class ProductRepositoryTest
     public void CreateProduct_ActuallyAddsProduct_ToDatabase()
     {
         var sut = new ProductRepository(_options);
-        Product productToCreate = new Product(102, "Edam Cheese", 5.99M, defaultCategory);
+        Product productToCreate = new Product(102, "Edam Cheese", 5.99M, _defaultCategory);
         
         sut.CreateProduct(productToCreate);
 
@@ -119,19 +120,18 @@ public class ProductRepositoryTest
     [TestMethod]
     public void UpdateProduct_updatesProduct_ToDatabase()
     {
+        Product product = new(110, "Gouda Cheese", 6.69M, _defaultCategory);
         using (var context = new ProductContext(_options))
         {
-            Product[] products =
-            {
-                new (110, "Gouda Cheese", 6.69M, defaultCategory),
-            };
+            Product[] products = { product };
             context.Products.AddRange(products);
             context.SaveChanges();
         }
         var sut = new ProductRepository(_options);
-        Product productToUpdate = new(110, "Gouda Cheese 48%", 7.70M, defaultCategory);
+        product.Naam = "Gouda Cheese 48%";
+        product.Prijs = 7.70M;
 
-        sut.UpdateProduct(productToUpdate);
+        sut.UpdateProduct(product);
 
         Product result = sut.FindProduct(110);
         Assert.IsTrue(result.Prijs == 7.70M && result.Id == 110 && result.Naam == "Gouda Cheese 48%");
@@ -140,18 +140,18 @@ public class ProductRepositoryTest
     [TestMethod]
     public void UpdateProduct_updatesCategory_ToDatabase()
     {
+        Category category = new Category(200, "Cheese");
+        Product product = new(110, "Gouda Cheese", 6.69M, category);
         using (var context = new ProductContext(_options))
         {
-            Category category = new Category(200, "Cheese");
-            Product product = new(110, "Gouda Cheese", 6.69M, category);
             context.Products.Add(product);
             context.SaveChanges();
         }
         var sut = new ProductRepository(_options);
         
         Category newCategory = new Category(500, "Dairy");
-        Product productToUpdate = new(110, "Gouda Cheese", 6.69M, newCategory);
-        sut.UpdateProduct(productToUpdate); // TODO: Concurrency issue 
+        product.Category = newCategory;
+        sut.UpdateProduct(product); // TODO: Concurrency issue
         // The database operation was expected to affect 1 row(s), but actually affected 0 row(s);
         // data may have been modified or deleted since entities were loaded.
         // See http://go.microsoft.com/fwlink/?LinkId=527962 for information on

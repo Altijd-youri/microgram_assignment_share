@@ -38,10 +38,19 @@ public class ProductRepository
         context.SaveChanges();
     }
 
-    public void UpdateProduct(Product productToUpdate)
+    public void UpdateProduct(Product product)
     {
         using var context = new ProductContext(_options);
-        context.Products.Update(productToUpdate);
+        var productToChange = context.Products
+            .Include(p => p.Category)
+            .Single(p => p.Id == 110);
+
+        productToChange.Id = product.Id;
+        productToChange.Naam = product.Naam;
+        productToChange.Prijs = product.Prijs;
+        productToChange.Category = product.Category;
+
+        context.Products.Update(productToChange);
         context.SaveChanges();
     }
 }

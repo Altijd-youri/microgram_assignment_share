@@ -12,6 +12,7 @@ public class ProductMapping : IEntityTypeConfiguration<Product>
             .HasMaxLength(255);
         builder.Property(p => p.Prijs)
             .HasPrecision(2,2);
-        builder.HasOne(p => p.Category);
+        builder.HasOne(p => p.Category)
+            .WithMany(c => c.Products);
     }
 }
