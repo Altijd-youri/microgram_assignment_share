@@ -45,10 +45,21 @@ public class ProductRepository
             .Include(p => p.Category)
             .Single(p => p.Id == 110);
 
-        productToChange.Id = product.Id;
+        //productToChange.Id = product.Id;
         productToChange.Naam = product.Naam;
         productToChange.Prijs = product.Prijs;
-        productToChange.Category = product.Category;
+        var existingCategory = context.Categories.Find(product.Category.Id);
+        if (existingCategory == null)
+        {
+            productToChange.Category = product.Category;
+        }
+        else
+        {
+            productToChange.Category = existingCategory;
+        }
+
+
+
 
         context.Products.Update(productToChange);
         context.SaveChanges();
