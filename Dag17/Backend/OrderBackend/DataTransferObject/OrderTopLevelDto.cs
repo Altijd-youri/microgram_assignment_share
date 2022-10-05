@@ -1,3 +1,3 @@
 namespace OrderBackend.DataTransferObject;
 
-public record OrderTopLevelDto();
+public record OrderTopLevelDto(long Id, DateTime Datum);
