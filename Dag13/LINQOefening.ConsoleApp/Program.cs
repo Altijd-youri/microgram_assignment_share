@@ -22,9 +22,30 @@ namespace Lab_02
 
         static void Exercise01()
         {
-            Console.WriteLine("Exercise 01 - Start");
+            // Are there any employees with less than 21 sick leave hours?
+            // How many employees have less than 21 sick leave hours?
+            // For each employee that has less than 21 sick leave hours, display his/her name, gender and number of sick leave hours.
+            // Display the same list but now double sorted, first by gender and then by name.
 
+            Console.WriteLine("Exercise 01 - Start");
+            
             //TODO: Add code here
+            bool employeesWithLessThan21SickLeaveHours = 
+                Employees
+                    .Any(employee => employee.SickLeaveHours < 21);
+            
+            int numberOfEmployeesWithLessThan21SickLeaveHours = 
+                Employees
+                .Count(employee => employee.SickLeaveHours < 21);
+            
+            List<Employee> ListEmployeesWithLessThan21SickLeaveHours = 
+                Employees
+                    .Where(employee => employee.SickLeaveHours < 21)
+                    .Select(employee => );
+            
+            Console.WriteLine("Are there any employees with less than 21 sick leave hours?: " + employeesWithLessThan21SickLeaveHours);
+            
+            Console.WriteLine("How many employees have less than 21 sick leave hours?: " + numberOfEmployeesWithLessThan21SickLeaveHours);
             
             Console.WriteLine("Exercise 01 - End\n");
         }
