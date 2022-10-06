@@ -8,7 +8,14 @@ string connectionString = Environment.GetEnvironmentVariable("MS_SQL_CONNECTION_
                           ?? throw new InvalidOperationException("MS_SQL_CONNECTION_STRING environment variable is required!");
 
 DbContextOptions<OrderContext> options = new DbContextOptionsBuilder<OrderContext>()
-    .UseSqlServer(connectionString)
+    .UseSqlServer(connectionString, options =>
+    {
+        options.EnableRetryOnFailure(
+            maxRetryCount: 10,
+            maxRetryDelay: TimeSpan.FromSeconds(3),
+            errorNumbersToAdd: new List<int>()
+        );
+    })
     .Options;
 
 // Add services to the container.
