@@ -4,6 +4,7 @@ using OrderBackend.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Database options and setup
 string connectionString = Environment.GetEnvironmentVariable("MS_SQL_CONNECTION_STRING") 
                           ?? throw new InvalidOperationException("MS_SQL_CONNECTION_STRING environment variable is required!");
 
@@ -17,6 +18,9 @@ DbContextOptions<OrderContext> options = new DbContextOptionsBuilder<OrderContex
         );
     })
     .Options;
+
+using var context = new OrderContext(options);
+context.Database.EnsureCreated();
 
 // Add services to the container.
 builder.Services.AddControllers();

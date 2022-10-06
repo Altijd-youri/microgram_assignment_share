@@ -1,4 +1,4 @@
 FROM mcr.microsoft.com/dotnet/aspnet
 WORKDIR /app
-COPY ./bin/Release/net6.0 .
+COPY ./obj/docker/publish .
 ENTRYPOINT ["dotnet", "OrderWebsite.dll"]
