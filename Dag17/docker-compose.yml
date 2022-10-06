@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  yvds-order-backend:
+    image: yvds-backend
+    build:
+      context: Backend/OrderBackend
+      dockerfile: Dockerfile
+    environment:
+      MS_SQL_CONNECTION_STRING: 'Server=yvds-database;Database=OrderDatabase;User=sa;Password=Geheim_101'
+    ports:
+      - 5050:80
+    depends_on:
+      -   yvds-sqlserver
+    networks:
+      -   yvds-network
+
+  yvds-sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    container_name: yvds-database
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Geheim_101
+    networks:
+      -   yvds-network
+
+networks:
+  yvds-network:
+  
