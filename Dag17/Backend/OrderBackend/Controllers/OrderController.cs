@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OrderBackend.DataTransferObject;
+using OrderBackend.Repository;
 
 namespace OrderBackend.Controllers
 {
@@ -7,15 +8,17 @@ namespace OrderBackend.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        private readonly IOrderRepository _orderRepository;
+        
+        public OrderController(IOrderRepository orderRepository)
+        {
+            _orderRepository = orderRepository;
+        }
+
         [HttpGet]
         public IEnumerable<OrderTopLevelDto> GetOrderList()
         {
-            // TODO implement with repository
-            return new List<OrderTopLevelDto>()
-            {
-                new(1, DateTime.Today),
-                new(2, DateTime.Today)
-            };
+            return _orderRepository.GetAllOrders().Select(o => new OrderTopLevelDto(o.Ordernummer, o.Datum));
         }
     }
 }

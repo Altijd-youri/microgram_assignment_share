@@ -2,7 +2,7 @@ namespace OrderBackend.Models;
 
 public class Product
 {
-    public long id { get; set; }
+    public long Id { get; set; }
     public string Naam { get; set;  }
     public decimal Prijs { get; set;  }
 
@@ -12,7 +12,7 @@ public class Product
 
     public Product(long id, string naam, decimal prijs)
     {
-        this.id = id;
+        this.Id = id;
         Naam = naam;
         Prijs = prijs;
     }
