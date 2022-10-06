@@ -2,7 +2,7 @@ version: '3'
 
 services:
   yvds-order-backend:
-    image: huminor.azurecr.io/yvds-backend
+    image: huminor.azurecr.io/yvds-dag20-orderbackend:1
     environment:
       MS_SQL_CONNECTION_STRING: 'Server=yvds-database;Database=OrderDatabase;User=sa;Password=Geheim_101'
     depends_on:
@@ -16,7 +16,7 @@ services:
       MSSQL_SA_PASSWORD: Geheim_101
   
   yvds-order-frontend:
-    image: huminor.azurecr.io/yvds-orderwebsite
+    image: huminor.azurecr.io/yvds-dag20-orderwebsite:1
     ports:
       - 5151:80
     depends_on:
