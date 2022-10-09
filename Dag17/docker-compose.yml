@@ -17,6 +17,8 @@ services:
   
   yvds-order-frontend:
     image: huminor.azurecr.io/yvds-dag20-orderwebsite:1
+    environment:
+      API_BASE_URL: http://yvds-order-backend
     ports:
       - 5151:80
     depends_on:

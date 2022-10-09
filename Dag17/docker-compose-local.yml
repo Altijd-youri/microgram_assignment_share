@@ -31,6 +31,8 @@ services:
     build:
       context: Frontend/OrderWebsite
       dockerfile: Dockerfile
+    environment:
+      API_BASE_URL: http://yvds-order-backend
     ports:
       - 5151:80
     depends_on:
