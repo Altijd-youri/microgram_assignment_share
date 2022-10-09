@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  yvds-sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    container_name: yvds-database-standalone-dev
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Geheim_101
+    ports:
+      - 1433:1433
+
+
+  

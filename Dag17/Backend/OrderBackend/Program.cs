@@ -19,8 +19,10 @@ DbContextOptions<OrderContext> options = new DbContextOptionsBuilder<OrderContex
     })
     .Options;
 
-using var context = new OrderContext(options);
-context.Database.EnsureCreated();
+using (var context = new OrderContext(options))
+{
+    context.Database.EnsureCreated();
+}
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -39,12 +41,29 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    PopulateDatabaseWithSamples();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+void PopulateDatabaseWithSamples()
+{
+    using (var context = new OrderContext(options))
+    {
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
+        
+        context.Orders.AddRange(
+            new Order(DateTime.Today), 
+            new Order(DateTime.Today.AddDays(-1))
+        );
+        context.SaveChanges();
+    }
+}

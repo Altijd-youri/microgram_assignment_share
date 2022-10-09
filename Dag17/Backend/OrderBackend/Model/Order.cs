@@ -9,7 +9,12 @@ public class Order
     public Order()
     {
     }
-
+    
+    public Order(DateTime datum)
+    {
+        Datum = datum;
+        OrderRows = new List<OrderRow>();
+    }
     public Order(DateTime datum, long ordernummer)
     {
         Datum = datum;

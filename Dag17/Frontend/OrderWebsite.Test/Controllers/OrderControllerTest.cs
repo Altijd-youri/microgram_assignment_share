@@ -71,6 +71,13 @@ public class OrderControllerTest
         
         Assert.IsInstanceOfType(result, typeof(ViewResult));
     }
+
+    public void Edit_ReturnsViewResult()
+    {
+        var result = sut.Edit()
+
+        Assert.IsInstanceOfType(result, typeof(ViewResult));
+    }
     
     [TestMethod]
     public void Edit_model_IsOrderWithCorrectTopLevelInformation()
