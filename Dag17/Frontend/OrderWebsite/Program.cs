@@ -1,11 +1,13 @@
 using OrderWebsite.Agents;
-using OrderWebsite.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<IOrderAgent, OrderAgent>();
+
+string baseUrl = Environment.GetEnvironmentVariable("API_BASE_URL")
+    ?? throw new InvalidOperationException("API_BASE_URL environment variable is required!");;
+builder.Services.AddSingleton<IOrderAgent>(new OrderAgent(baseUrl));
 
 var app = builder.Build();
 
@@ -15,7 +17,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

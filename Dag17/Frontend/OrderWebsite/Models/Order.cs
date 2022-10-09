@@ -1,12 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 
 namespace OrderWebsite.Models;
 
 public class Order
 {
-    public long Ordernummer { get; }
-    [DataType(DataType.Date)]
-    public DateTime Datum { get; }
+    public long Ordernummer { get; set; }
+    public DateTime Datum { get; set; }
     public List<OrderRow> OrderRows { get; set; }
 
     public Order()
