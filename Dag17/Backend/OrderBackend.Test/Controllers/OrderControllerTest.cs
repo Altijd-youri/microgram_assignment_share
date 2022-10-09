@@ -18,7 +18,7 @@ public class OrderControllerTest
         var result = sut.GetOrderList();
         
         Assert.AreEqual(2, result.Count());
-        Assert.IsTrue(result.Any(o => o.Id == 1));
-        Assert.IsTrue(result.Any(o => o.Id == 2));
+        Assert.IsTrue(result.Any(o => o.Ordernummer == 1));
+        Assert.IsTrue(result.Any(o => o.Ordernummer == 2));
     }
 }
