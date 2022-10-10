@@ -1,22 +1,24 @@
 using CASwebsite.Models;
+using Flurl;
+using Flurl.Http;
 
 namespace CASwebsite.Agents;
 
 public class CursusAgent : ICursusAgent
 {
+    private readonly string _baseUrl;
+
+    public CursusAgent(string baseUrl)
+    {
+        _baseUrl = baseUrl;
+    }
+    
     public IEnumerable<CursusInstantie> GetCursusInstanties()
     {
-        // TODO: Implement agent
-        return new[]
-        {
-            new CursusInstantie(
-                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                new DateOnly(2022, 10, 11)
-            ),
-            new CursusInstantie(
-                new Cursus("Java", "Programming in Java", 5),
-                new DateOnly(2022, 10, 11)
-            )
-        };
+        var result = _baseUrl
+            .AppendPathSegment("api/cursus")
+            .GetJsonAsync<IEnumerable<CursusInstantie>>()
+            .Result;
+        return result;
     }
 }
