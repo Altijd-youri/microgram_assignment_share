@@ -17,6 +17,11 @@ namespace CASwebsite.Controllers
             IEnumerable<CursusInstantie> model = _CursusAgent.GetCursusInstanties();
             return View(model);
         }
+        
+        public ActionResult Create()
+        {
+            return View();
+        }
 
         public IActionResult Details()
         {
