@@ -11,11 +11,11 @@ public class MockCursusAgent : ICursusAgent
         {
             new CursusInstantie(
                 new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                new DateOnly(2022, 10, 11)
+                new DateTime(2022, 10, 11)
             ),
             new CursusInstantie(
                 new Cursus("JAVA", "Programming in Java", 5),
-                new DateOnly(2022, 10, 10)
+                new DateTime(2022, 10, 10)
             )
         };
     }

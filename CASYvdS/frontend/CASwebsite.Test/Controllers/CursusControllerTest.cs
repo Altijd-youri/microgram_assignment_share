@@ -43,4 +43,12 @@ public class CursusControllerTest
             ci.Cursus.Code == "JAVA" && ci.Cursus.Naam == "Programming in Java" && ci.Cursus.Duur == 5
         ));
     }
+
+    [TestMethod]
+    public void Create_ReturnsViewResult()
+    {
+        var result = _Sut.Create();
+
+        Assert.IsInstanceOfType(result, typeof(ViewResult));
+    }
 }

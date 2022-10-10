@@ -1,5 +1,5 @@
+using CASbackend.Repository;
 using CASbackend.Models;
-using CASwebsite.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CASbackend.Controllers
@@ -8,20 +8,17 @@ namespace CASbackend.Controllers
     [ApiController]
     public class CursusController : ControllerBase
     {
+        private readonly ICursusRepository _CursusRepository;
+
+        public CursusController(ICursusRepository cursusRepository)
+        {
+            _CursusRepository = cursusRepository;
+        }
+
         [HttpGet]
         public IEnumerable<CursusInstantie> GetCursusInstanties()
         {
-            return new[]
-            {
-                new CursusInstantie(
-                    new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                    new DateOnly(2022, 10, 11)
-                ),
-                new CursusInstantie(
-                    new Cursus("Java", "Programming in Java", 5),
-                    new DateOnly(2022, 10, 11)
-                )
-            };
+            return _CursusRepository.GetAllCursusInstanties();
         }
     }
 }

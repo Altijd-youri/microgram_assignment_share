@@ -21,6 +21,9 @@ using var context = new CursusContext(options);
 context.Database.EnsureCreated();
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<ICursusRepository, CursusRepository>();
+builder.Services.AddTransient<DbContextOptions<CursusContext>>(_ => options);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,8 +36,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
