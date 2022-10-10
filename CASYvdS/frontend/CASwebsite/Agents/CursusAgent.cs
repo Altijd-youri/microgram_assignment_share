@@ -1,0 +1,22 @@
+using CASwebsite.Models;
+
+namespace CASwebsite.Agents;
+
+public class CursusAgent : ICursusAgent
+{
+    public IEnumerable<CursusInstantie> GetCursusInstanties()
+    {
+        // TODO: Implement agent
+        return new[]
+        {
+            new CursusInstantie(
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                new DateOnly(2022, 10, 11)
+            ),
+            new CursusInstantie(
+                new Cursus("Java", "Programming in Java", 5),
+                new DateOnly(2022, 10, 11)
+            )
+        };
+    }
+}

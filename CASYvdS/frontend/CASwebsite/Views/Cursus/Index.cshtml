@@ -1,0 +1,54 @@
+@model IEnumerable<CASwebsite.Models.CursusInstantie>
+
+@{
+    ViewData["Title"] = "Cursus lijst";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cursus lijst</h1>
+
+@* <p> *@
+@*     <a asp-action="Create">Create New</a> *@
+@* </p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cursus.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cursus.Naam)
+            </th>
+            <th>
+                Startdatum
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cursus.Duur)
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cursus.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cursus.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDatum.Day)-@Html.DisplayFor(modelItem => item.StartDatum.Month)-@Html.DisplayFor(modelItem => item.StartDatum.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cursus.Duur)
+            </td>
+            <td>
+                @Html.ActionLink("Bekijken", "Details", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
