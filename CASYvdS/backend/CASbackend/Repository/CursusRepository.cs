@@ -1,3 +1,4 @@
+using System.Globalization;
 using CASbackend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,11 +13,22 @@ public class CursusRepository : ICursusRepository
         _options = options;
     }
 
-    public IEnumerable<CursusInstantie> GetAllCursusInstanties()
+    public IEnumerable<CursusInstantie> GetAllCursusInstanties(int weeknummer)
     {
         using var context = new CursusContext(_options);
         return context.CursusInstanties
             .Include(ci => ci.Cursus)
+            .ToList()
+            .Where(ci => GetWeeknummer(ci.StartDatum) == weeknummer)
             .ToList();
+    }
+    
+    private static int GetWeeknummer(DateTime date)
+    {
+        Calendar cal = new GregorianCalendar();
+        DayOfWeek firstDay = DayOfWeek.Monday;
+        CalendarWeekRule rule = CalendarWeekRule.FirstFourDayWeek;
+        var weeknummer = cal.GetWeekOfYear(date, rule, firstDay);
+        return weeknummer;
     }
 }

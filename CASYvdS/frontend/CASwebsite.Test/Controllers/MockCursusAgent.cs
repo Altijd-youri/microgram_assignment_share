@@ -5,18 +5,42 @@ namespace CASwebsite.Test.Controllers;
 
 public class MockCursusAgent : ICursusAgent
 {
-    public IEnumerable<CursusInstantie> GetCursusInstanties()
+    
+    private static List<CursusInstantie> _list = new List<CursusInstantie>()
     {
-        return new List<CursusInstantie>()
+        new (
+            new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+            new DateTime(2022, 10, 10)
+        ),
+        new (
+            new Cursus("JAVA", "Programming in Java", 5),
+            new DateTime(2022, 10, 9)
+        )
+    };
+    public IEnumerable<CursusInstantie> GetCursusInstanties(int weeknummer)
+    {
+        switch (weeknummer)
         {
-            new CursusInstantie(
-                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                new DateTime(2022, 10, 11)
-            ),
-            new CursusInstantie(
-                new Cursus("JAVA", "Programming in Java", 5),
-                new DateTime(2022, 10, 10)
-            )
-        };
+            case 1:
+                return _list;
+            case 40:
+                return new List<CursusInstantie>()
+                {
+                    new (
+                        new Cursus("JAVA", "Programming in Java", 5),
+                        new DateTime(2022, 10, 9)
+                    )
+                };
+            case 41:
+                return new List<CursusInstantie>()
+                {
+                    new (
+                        new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                        new DateTime(2022, 10, 10)
+                    )
+                };
+            default:
+                return new List<CursusInstantie>();
+        }
     }
 }

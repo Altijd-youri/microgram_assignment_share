@@ -32,10 +32,11 @@ public class OrderAgentTest : IDisposable
             new { Ordernummer=2, Datum="2022-10-10T00:00:00" },
         });
         var sut = new CursusAgent("http://test.url");
+        var weeknummber = 1;
         
-        sut.GetCursusInstanties();
+        sut.GetCursusInstanties(weeknummber);
         
-        _httpTest.ShouldHaveCalled("http://test.url/api/cursus");
+        _httpTest.ShouldHaveCalled("http://test.url/api/cursus/week/1");
     }
 
     [TestMethod]
@@ -64,8 +65,9 @@ public class OrderAgentTest : IDisposable
             }
         });
         var sut = new CursusAgent("http://test.url");
+        var nonImportantWeeknumber = 1;
         
-        var result = sut.GetCursusInstanties();
+        var result = sut.GetCursusInstanties(nonImportantWeeknumber);
         
         Assert.AreEqual(2, result.Count());
         Assert.IsTrue(result.Any(ci =>

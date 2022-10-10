@@ -1,3 +1,4 @@
+using CASbackend.Models;
 using CASbackend.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,8 +18,10 @@ DbContextOptions<CursusContext> options = new DbContextOptionsBuilder<CursusCont
     })
     .Options;
 
-using var context = new CursusContext(options);
-context.Database.EnsureCreated();
+using (var context = new CursusContext(options))
+{
+    context.Database.EnsureCreated();
+}
 
 builder.Services.AddControllers();
 builder.Services.AddTransient<ICursusRepository, CursusRepository>();
@@ -35,6 +38,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    DemoData();
 }
 
 app.UseAuthorization();
@@ -42,3 +46,25 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void DemoData()
+{
+    using var context = new CursusContext(options);
+    context.Database.EnsureDeleted();
+    context.Database.EnsureCreated();
+    
+    context.CursusInstanties.AddRange(
+        new[]
+        {
+            new CursusInstantie(
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                new DateTime(2022, 10, 10)
+            ),
+            new CursusInstantie(
+                new Cursus( "JAVA", "Programming in Java", 5),
+                new DateTime(2022, 10, 9)
+            )
+        }
+    );
+    context.SaveChanges();
+}

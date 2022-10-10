@@ -25,7 +25,7 @@ public class CursusRepositoryTest
     }
     
     [TestMethod]
-    public void GetAllOrders_returnsOrders()
+    public void GetAllCursusInstanties_Week40_ReturnsCurssusen()
     {
         using (var context = new CursusContext(_options))
         {
@@ -33,11 +33,11 @@ public class CursusRepositoryTest
             {
                 new (
                 new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                new DateTime(2022, 10, 11)
+                new DateTime(2022, 10, 10)
                 ),
                 new (
                     new Cursus("JAVA", "Programming in Java", 5),
-                    new DateTime(2022, 10, 11)
+                    new DateTime(2022, 10, 9)
                 )
             };
             context.CursusInstanties.AddRange(instanties);
@@ -45,15 +45,41 @@ public class CursusRepositoryTest
         }
         var sut = new CursusRepository(_options);
 
-        var result = sut.GetAllCursusInstanties();
+        var result = sut.GetAllCursusInstanties(41);
         
-        Assert.AreEqual(2, result.Count());
+        Assert.AreEqual(1, result.Count());
         Assert.IsTrue(result.Any(ci =>
-            ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 11 &&
+            ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 10 &&
             ci.Cursus.Code == "ASPNET" && ci.Cursus.Naam == "Programming in ASP.NET" && ci.Cursus.Duur == 5
         ));
+    }
+    
+    [TestMethod]
+    public void GetAllCursusInstanties_Week40_ReturnsCursussen()
+    {
+        using (var context = new CursusContext(_options))
+        {
+            var instanties = new CursusInstantie[]
+            {
+                new (
+                    new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                    new DateTime(2022, 10, 10)
+                ),
+                new (
+                    new Cursus("JAVA", "Programming in Java", 5),
+                    new DateTime(2022, 10, 9)
+                )
+            };
+            context.CursusInstanties.AddRange(instanties);
+            context.SaveChanges();
+        }
+        var sut = new CursusRepository(_options);
+
+        var result = sut.GetAllCursusInstanties(40);
+        
+        Assert.AreEqual(1, result.Count());
         Assert.IsTrue(result.Any(ci =>
-            ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 11 &&
+            ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 9 &&
             ci.Cursus.Code == "JAVA" && ci.Cursus.Naam == "Programming in Java" && ci.Cursus.Duur == 5
         ));
     }

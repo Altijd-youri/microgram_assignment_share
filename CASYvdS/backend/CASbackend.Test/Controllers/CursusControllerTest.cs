@@ -11,7 +11,7 @@ public class OrderControllerTest
         var repoMock = new CursusMockRepository();
         var sut = new CursusController(repoMock);
 
-        var result = sut.GetCursusInstanties();
+        var result = sut.GetCursusInstanties(41);
         
         Assert.AreEqual(2, result.Count());
         Assert.IsTrue(result.Any(ci =>

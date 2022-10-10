@@ -5,7 +5,7 @@ namespace CASbackend.Test.Controllers;
 
 public class CursusMockRepository : ICursusRepository
 {
-    public IEnumerable<CursusInstantie> GetAllCursusInstanties()
+    public IEnumerable<CursusInstantie> GetAllCursusInstanties(int weeknummer)
     {
         return new[]
         {
