@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASbackend", "CASbackend\CASbackend.csproj", "{682A7502-08A9-471C-9E00-9BC5DEDBA206}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASbackend.Test", "CASbackend.Test\CASbackend.Test.csproj", "{B63DF7CC-DC05-40B6-A19D-1F35FD30AD7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{682A7502-08A9-471C-9E00-9BC5DEDBA206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{682A7502-08A9-471C-9E00-9BC5DEDBA206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{682A7502-08A9-471C-9E00-9BC5DEDBA206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{682A7502-08A9-471C-9E00-9BC5DEDBA206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63DF7CC-DC05-40B6-A19D-1F35FD30AD7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63DF7CC-DC05-40B6-A19D-1F35FD30AD7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63DF7CC-DC05-40B6-A19D-1F35FD30AD7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63DF7CC-DC05-40B6-A19D-1F35FD30AD7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

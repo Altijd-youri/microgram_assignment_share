@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  yvds-CAS-database:
+    image: mcr.microsoft.com/mssql/server
+    container_name: yvds-CAS-database-standalone
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Geheim_101
+    ports:
+      - 1433:1433
+
+
+  

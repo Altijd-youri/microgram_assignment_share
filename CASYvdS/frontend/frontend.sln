@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASwebsite", "CASwebsite\CASwebsite.csproj", "{AB6ADEE1-BBB5-4C8A-9C24-87A0D7FDD601}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASwebsite.Test", "CASwebsite.Test\CASwebsite.Test.csproj", "{91D1669E-5DF7-4CB3-82E6-43D7CA81E39C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB6ADEE1-BBB5-4C8A-9C24-87A0D7FDD601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB6ADEE1-BBB5-4C8A-9C24-87A0D7FDD601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB6ADEE1-BBB5-4C8A-9C24-87A0D7FDD601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB6ADEE1-BBB5-4C8A-9C24-87A0D7FDD601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D1669E-5DF7-4CB3-82E6-43D7CA81E39C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D1669E-5DF7-4CB3-82E6-43D7CA81E39C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D1669E-5DF7-4CB3-82E6-43D7CA81E39C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D1669E-5DF7-4CB3-82E6-43D7CA81E39C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
