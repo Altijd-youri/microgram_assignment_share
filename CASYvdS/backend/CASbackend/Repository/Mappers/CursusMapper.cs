@@ -13,7 +13,7 @@ public class CursusMapper : IEntityTypeConfiguration<Cursus>
             .IsRequired();
         builder.Property(c => c.Duur)
             .IsRequired();
-        builder.Property(c => c.Naam)
+        builder.Property(c => c.Titel)
             .IsRequired();
     }
 }
