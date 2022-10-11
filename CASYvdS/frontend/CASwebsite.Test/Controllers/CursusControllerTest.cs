@@ -39,11 +39,11 @@ public class CursusControllerTest
         Assert.AreEqual(2, instanties.Count());
         Assert.IsTrue(instanties.Any(ci =>
             ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 10 &&
-            ci.Cursus.Code == "ASPNET" && ci.Cursus.Naam == "Programming in ASP.NET" && ci.Cursus.Duur == 5
+            ci.Cursus.Code == "ASPNET" && ci.Cursus.Titel == "Programming in ASP.NET" && ci.Cursus.Duur == 5
         ));
         Assert.IsTrue(instanties.Any(ci =>
             ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 9 &&
-            ci.Cursus.Code == "JAVA" && ci.Cursus.Naam == "Programming in Java" && ci.Cursus.Duur == 5
+            ci.Cursus.Code == "JAVA" && ci.Cursus.Titel == "Programming in Java" && ci.Cursus.Duur == 5
         ));
     }
     
@@ -58,7 +58,7 @@ public class CursusControllerTest
         Assert.AreEqual(1, instanties.Count());
         Assert.IsTrue(instanties.Any(ci =>
             ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 10 &&
-            ci.Cursus.Code == "ASPNET" && ci.Cursus.Naam == "Programming in ASP.NET" && ci.Cursus.Duur == 5
+            ci.Cursus.Code == "ASPNET" && ci.Cursus.Titel == "Programming in ASP.NET" && ci.Cursus.Duur == 5
         ));
     }
     
