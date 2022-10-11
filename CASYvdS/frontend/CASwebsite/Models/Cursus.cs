@@ -4,13 +4,13 @@ public class Cursus
 {
     public long Id { get; set; }
     public string Code { get; set; }
-    public string Naam { get; set; }
+    public string Titel { get; set; }
     public int Duur { get; set; }
 
-    public Cursus(string code, string naam, int duur)
+    public Cursus(string code, string titel, int duur)
     {
         Code = code;
-        Naam = naam;
+        Titel = titel;
         Duur = duur;
     }
 }
