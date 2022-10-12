@@ -21,4 +21,14 @@ public class CursusAgent : ICursusAgent
             .Result;
         return result;
     }
+
+    public FileUpload UploadFile(FileUpload file)
+    {
+        var result = _baseUrl.AppendPathSegment("api/upload")
+            .PostJsonAsync(file)
+            .ReceiveJson<FileUpload>()
+            .Result;
+
+        return result;
+    }
 }

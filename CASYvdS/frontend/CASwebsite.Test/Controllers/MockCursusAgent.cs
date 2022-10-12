@@ -43,4 +43,9 @@ public class MockCursusAgent : ICursusAgent
                 return new List<CursusInstantie>();
         }
     }
+
+    public FileUpload UploadFile(FileUpload planning)
+    {
+        throw new NotImplementedException();
+    }
 }

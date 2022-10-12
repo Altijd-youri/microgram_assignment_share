@@ -8,7 +8,7 @@ public class CursusMapper : IEntityTypeConfiguration<Cursus>
 {
     public void Configure(EntityTypeBuilder<Cursus> builder)
     {
-        builder.HasKey(c => c.Id);
+        builder.HasKey(c => c.Code);
         builder.Property(c => c.Code)
             .IsRequired();
         builder.Property(c => c.Duur)

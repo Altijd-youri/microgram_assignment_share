@@ -8,7 +8,7 @@ public class CursusInstantieMapper : IEntityTypeConfiguration<CursusInstantie>
 {
     public void Configure(EntityTypeBuilder<CursusInstantie> builder)
     {
-        builder.HasKey(ci => ci.Id);
+        builder.HasKey(ci => new {ci.StartDatum, ci.CursusCode});
         builder.Property(ci => ci.StartDatum)
             .IsRequired();
         builder.HasOne(ci => ci.Cursus);

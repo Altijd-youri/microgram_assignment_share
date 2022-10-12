@@ -20,7 +20,7 @@ public class CursusMockRepository : ICursusRepository
         };
     }
 
-    public InsertStatus CreateCursusInstanties(IEnumerable<CursusInstantie> instanties)
+    public FileUpload CreateCursusInstanties(IEnumerable<CursusInstantie> instanties)
     {
         //TODO test
         throw new NotImplementedException();

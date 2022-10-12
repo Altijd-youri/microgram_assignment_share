@@ -35,7 +35,40 @@ namespace CASwebsite.Controllers
         
         public ActionResult Create()
         {
-            return View();
+            var model = new FileUpload();
+            return View(model);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Create(FileUpload planning)
+        {
+            const int twoMb = 2097152;
+            var model = new FileUpload();
+            if (planning.File == null)
+            {
+                model.Message = "";
+                model.IsValid = false;
+            }
+            else
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await planning.File.CopyToAsync(memoryStream);
+                    if (memoryStream.Length < twoMb)
+                    {
+                        var file = new FileUpload()
+                        {
+                            Content = memoryStream.ToArray()
+                        };
+                        model = _CursusAgent.UploadFile(file);
+                    }
+                    else
+                    {
+                        Console.WriteLine("File is too large.");
+                    }
+                }
+            }
+            return View(model);
         }
 
         public IActionResult Details()
