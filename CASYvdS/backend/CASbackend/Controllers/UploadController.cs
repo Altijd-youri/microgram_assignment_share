@@ -34,11 +34,11 @@ public class UploadController : ControllerBase
     }
     
     [HttpPost]
-    public FileUpload UploadFile(FileUpload file)
+    public OutFileUpload UploadFile(InFileUpload inFile)
     {
-        FileUpload status = new FileUpload();
+        OutFileUpload status = new OutFileUpload();
 
-        string[] regels = SplitFileIntoLines(file.Content);
+        string[] regels = SplitFileIntoLines(inFile.Content);
         
         List<CursusInstantie> instanties = new();
         CursusInstantieBuilder builder = CursusInstantieBuilder.Get();

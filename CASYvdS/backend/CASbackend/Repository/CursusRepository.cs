@@ -23,10 +23,10 @@ public class CursusRepository : ICursusRepository
             .ToList();
     }
 
-    public FileUpload CreateCursusInstanties(IEnumerable<CursusInstantie> instanties)
+    public OutFileUpload CreateCursusInstanties(IEnumerable<CursusInstantie> instanties)
     {
         using var context = new CursusContext(_options);
-        var status = new FileUpload();
+        var status = new OutFileUpload();
         List<Cursus> insertedCursussen = new ();
         List<CursusInstantie> insertedInstanties = new ();
         

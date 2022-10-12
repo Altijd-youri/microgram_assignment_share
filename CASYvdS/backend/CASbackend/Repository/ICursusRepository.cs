@@ -6,5 +6,5 @@ public interface ICursusRepository
 {
     IEnumerable<CursusInstantie> GetAllCursusInstanties(int weeknummer);
 
-    FileUpload CreateCursusInstanties(IEnumerable<CursusInstantie> instanties);
+    OutFileUpload CreateCursusInstanties(IEnumerable<CursusInstantie> instanties);
 }
