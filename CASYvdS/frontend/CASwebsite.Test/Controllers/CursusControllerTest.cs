@@ -99,4 +99,12 @@ public class CursusControllerTest
 
         Assert.IsInstanceOfType(result, typeof(ViewResult));
     }
+
+    [TestMethod]
+    public void Base_ReturnsViewResult()
+    {
+        var result = _sut.Base();
+
+        Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+    }
 }

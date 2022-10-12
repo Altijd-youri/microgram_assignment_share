@@ -13,9 +13,16 @@ namespace CASwebsite.Controllers
         {
             _CursusAgent = cursusAgent;
         }
-        
-        [HttpGet("{weeknummer:int}")]
-        [HttpGet("")]
+
+        [HttpGet]
+        public ActionResult Base()
+        {
+            var weeknummer = GetWeeknummer(DateTime.Today);
+            return RedirectToAction("Index", new { weeknummer });
+        }
+
+        [HttpGet("cursusoverzicht/{weeknummer:int}")]
+        [HttpGet("cursusoverzicht")]
         public ActionResult Index(int weeknummer)
         {
             weeknummer = (weeknummer != 0) ? weeknummer : GetWeeknummer(DateTime.Today);
@@ -26,8 +33,8 @@ namespace CASwebsite.Controllers
             return View(model);
         }
 
-        [HttpPost("{weeknummer:int}")]
-        [HttpPost("")]
+        [HttpPost("cursusoverzicht/{weeknummer:int}")]
+        [HttpPost("cursusoverzicht")]
         public ActionResult Index(CursusLijst model)
         {
             return RedirectToAction("Index", new { weeknummer=model.Weeknummer });
