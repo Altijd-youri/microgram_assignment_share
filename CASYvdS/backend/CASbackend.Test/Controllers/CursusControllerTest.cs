@@ -15,15 +15,11 @@ public class OrderControllerTest
         
         Assert.AreEqual(2, result.Count());
         Assert.IsTrue(result.Any(ci =>
-            ci.Id == 200 &&
             ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 11 &&
-            ci.Cursus.Id == 2 &&
             ci.Cursus.Code == "ASPNET" && ci.Cursus.Titel == "Programming in ASP.NET" && ci.Cursus.Duur == 5
         ));
         Assert.IsTrue(result.Any(ci =>
-            ci.Id == 100 &&
             ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 11 &&
-            ci.Cursus.Id == 1 &&
             ci.Cursus.Code == "JAVA" && ci.Cursus.Titel == "Programming in Java" && ci.Cursus.Duur == 5
         ));
     }

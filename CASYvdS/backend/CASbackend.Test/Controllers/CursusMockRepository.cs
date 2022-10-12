@@ -10,15 +10,19 @@ public class CursusMockRepository : ICursusRepository
         return new[]
         {
             new CursusInstantie(
-                200,
-                new Cursus(2,"ASPNET", "Programming in ASP.NET", 5), 
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
                 new DateTime(2022, 10, 11)
             ),
             new CursusInstantie(
-                100,
-                new Cursus(1, "JAVA", "Programming in Java", 5),
+                new Cursus("JAVA", "Programming in Java", 5),
                 new DateTime(2022, 10, 11)
             )
         };
+    }
+
+    public InsertStatus CreateCursusInstanties(IEnumerable<CursusInstantie> instanties)
+    {
+        //TODO test
+        throw new NotImplementedException();
     }
 }

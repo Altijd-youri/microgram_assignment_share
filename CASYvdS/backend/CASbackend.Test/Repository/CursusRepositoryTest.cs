@@ -23,7 +23,8 @@ public class CursusRepositoryTest
         using var context = new CursusContext(_options);
         context.Database.EnsureCreated();
     }
-    
+
+    #region GetAllCursusInstanties
     [TestMethod]
     public void GetAllCursusInstanties_Week40_ReturnsCurssusen()
     {
@@ -83,4 +84,109 @@ public class CursusRepositoryTest
             ci.Cursus.Code == "JAVA" && ci.Cursus.Titel == "Programming in Java" && ci.Cursus.Duur == 5
         ));
     }
+    #endregion
+
+    #region CreateCursusInstanties
+    [TestMethod]
+    public void CreateCursusInstanties_InsertAllInstanties()
+    {
+        var sut = new CursusRepository(_options);
+        var instanties = new CursusInstantie[]
+        {
+            new (
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                new DateTime(2022, 10, 10)
+            ),
+            new (
+                new Cursus("JAVA", "Programming in Java", 5),
+                new DateTime(2022, 10, 9)
+            )
+        };
+        
+        sut.CreateCursusInstanties(instanties);
+        
+        using (var context = new CursusContext(_options))
+        {
+            CursusInstantie assertionOne = context.CursusInstanties
+                .Include(ci => ci.Cursus)
+                .Single(ci =>
+                ci.Cursus.Code == "ASPNET" &&
+                ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 10
+            );
+            Assert.IsNotNull(assertionOne);
+            CursusInstantie assertionTwo = context.CursusInstanties
+                .Include(ci => ci.Cursus)
+                .Single(ci =>
+                ci.Cursus.Code == "JAVA" &&
+                ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 9
+            );
+            Assert.IsNotNull(assertionTwo);
+        }
+    }
+    
+    [TestMethod]
+    public void CreateCursusInstanties_InsertsOne_OnDuplicateEntries()
+    {
+        var sut = new CursusRepository(_options);
+        var instanties = new CursusInstantie[]
+        {
+            new (
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                new DateTime(2022, 10, 10)
+            ),
+            new (
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                new DateTime(2022, 10, 10)
+            )
+        };
+        
+        sut.CreateCursusInstanties(instanties);
+        
+        using (var context = new CursusContext(_options))
+        {
+            IEnumerable<CursusInstantie> assertionOne = context.CursusInstanties
+                .Include(ci => ci.Cursus)
+                .Where(ci =>
+                    ci.Cursus.Code == "ASPNET" &&
+                    ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 10
+                );
+            Assert.AreEqual(1, assertionOne.Count());
+        }
+    }
+    
+    [TestMethod]
+    public void CreateCursusInstanties_InsertsTwo_OnDuplicateCursusWithDifferentDate()
+    {
+        var sut = new CursusRepository(_options);
+        var instanties = new CursusInstantie[]
+        {
+            new (
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                new DateTime(2022, 10, 10)
+            ),
+            new (
+                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                new DateTime(2022, 10, 17)
+            )
+        };
+        
+        sut.CreateCursusInstanties(instanties);
+        
+        using (var context = new CursusContext(_options))
+        {
+            IEnumerable<CursusInstantie> result = context.CursusInstanties
+                .Include(ci => ci.Cursus)
+                .Where(ci =>
+                    ci.Cursus.Code == "ASPNET"
+                );
+            Assert.AreEqual(2, result.Count());
+
+            var startDatum10Exists = result.Any(ci => ci.StartDatum.Day == 10);
+            var startDatum17Exists = result.Any(ci => ci.StartDatum.Day == 17);
+            
+            Assert.IsTrue(startDatum10Exists);
+            Assert.IsTrue(startDatum17Exists);
+        }
+    }
+    #endregion
 }
