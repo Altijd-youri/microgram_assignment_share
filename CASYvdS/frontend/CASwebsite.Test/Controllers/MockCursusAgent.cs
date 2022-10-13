@@ -63,6 +63,19 @@ public class MockCursusAgent : ICursusAgent
         
     }
 
+    public CursusInstantie GetCursusInstantie(string code, string datum)
+    {
+        switch (code)
+        {
+            case "ASPNET":
+                return new CursusInstantie(
+                    new Cursus("ASPNET", "Programming in ASP.NET", 5),
+                    new DateTime(2022, 10, 10)
+                );
+        }
+        return null;
+    }
+
     public FileUpload UploadFile(FileUpload planning)
     {
         throw new NotImplementedException();

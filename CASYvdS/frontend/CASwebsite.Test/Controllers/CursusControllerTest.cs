@@ -130,4 +130,26 @@ public class CursusControllerTest
 
         Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
     }
+    
+    [TestMethod]
+    public void Details_ReturnsViewResult()
+    {
+        var importantCursuscodeForMock = "ASPNET";
+        var dateThatIsNotUsedInMock = "10-10-2022";
+        
+        var result = _sut.Details(importantCursuscodeForMock, dateThatIsNotUsedInMock);
+
+        Assert.IsInstanceOfType(result, typeof(ViewResult));
+    }
+    
+    [TestMethod]
+    public void Details_NonExistingCursusInstantie_ReturnsRedirectActionResult()
+    {
+        var importantCursuscodeForMock = "NONEXISTENT";
+        var dateThatIsNotUsedInMock = "10-10-2022";
+        
+        var result = _sut.Details(importantCursuscodeForMock, dateThatIsNotUsedInMock);
+        
+        Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+    }
 }

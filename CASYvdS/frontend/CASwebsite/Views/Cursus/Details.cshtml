@@ -1,0 +1,13 @@
+@model CASwebsite.Models.CursusInstantie
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Cursus.Titel</h1>
+
+<div>
+    <p>Start op @Model.StartDatum.ToString("dd/MM/yyyy"), duurt @Model.Cursus.Duur dagen</p>
+    <hr />
+</div>

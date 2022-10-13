@@ -22,6 +22,15 @@ public class CursusAgent : ICursusAgent
         return result;
     }
 
+    public CursusInstantie GetCursusInstantie(string code, string datum)
+    {
+        var result = _baseUrl
+            .AppendPathSegment($"api/cursus/details/{code}/{datum}")
+            .GetJsonAsync<CursusInstantie>()
+            .Result;
+        return result;
+    }
+
     public FileUpload UploadFile(FileUpload file)
     {
         var result = _baseUrl.AppendPathSegment("api/upload")

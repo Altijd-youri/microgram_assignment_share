@@ -2,6 +2,7 @@ using System.Globalization;
 using CASwebsite.Agents;
 using CASwebsite.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace CASwebsite.Controllers
 {
@@ -13,7 +14,7 @@ namespace CASwebsite.Controllers
         {
             _CursusAgent = cursusAgent;
         }
-
+        
         [HttpGet("")]
         [HttpGet("cursusoverzicht")]
         public ActionResult Base()
@@ -82,18 +83,15 @@ namespace CASwebsite.Controllers
             return View(outModel);
         }
 
-        public IActionResult Details()
+        [HttpGet("cursus/details/{code}/{datum}")]
+        public IActionResult Details(string code, string datum)
         {
-            throw new NotImplementedException();
-        }
-        
-        private static int GetWeeknummer(DateTime date)
-        {
-            Calendar cal = new GregorianCalendar();
-            DayOfWeek firstDay = DayOfWeek.Sunday;
-            CalendarWeekRule rule = CalendarWeekRule.FirstFourDayWeek;
-            var weeknummer = cal.GetWeekOfYear(date, rule, firstDay);
-            return weeknummer;
+            var model = _CursusAgent.GetCursusInstantie(code, datum);
+            if (model != null)
+            {
+                return View(model);
+            }
+            return RedirectToAction("Base");
         }
     }
 }
