@@ -2,9 +2,14 @@ version: '3'
 
 services:
   yvds-cas-backend:
-    image: huminor.azurecr.io/yvds-cas-backend
+    image: yvds-cas-backend
+    build:
+      context: backend/CASbackend
+      dockerfile: Dockerfile
     environment:
       MS_SQL_CONNECTION_STRING: 'Server=yvds-CAS-database;Database=CASbackend;User=sa;Password=Geheim_101'
+    ports:
+      - 5050:80
     depends_on:
       -   yvds-cas-database
     networks:
@@ -16,15 +21,20 @@ services:
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: Geheim_101
+    ports:
+      - 1433:1433
     networks:
       -  yvds-cas-network
   
   yvds-cas-website:
-    image: huminor.azurecr.io/yvds-cas-website
+    image: yvds-cas-website
+    build:
+      context: frontend/CASwebsite
+      dockerfile: Dockerfile
     environment:
       API_BASE_URL: http://yvds-cas-backend
     ports:
-      - 8080:80
+      - 5151:80
     depends_on:
       -   yvds-cas-backend
     networks:
