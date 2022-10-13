@@ -88,7 +88,11 @@ public class UploadController : ControllerBase
                         break;
                 }
             }
-            status = _CursusRepository.CreateCursusInstanties(instanties);
+
+            var instantiesFilteredByDateRange = instanties
+                .Where(ci => ci.StartDatum > inFile.BeginFilter && ci.StartDatum <= inFile.EindFilter);
+
+            status = _CursusRepository.CreateCursusInstanties(instantiesFilteredByDateRange);
             status.IsValid = true;
         }
         catch (InvalidLineException e)

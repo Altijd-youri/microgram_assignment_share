@@ -12,6 +12,10 @@ public record FileUpload
     public int Duplicates { get; set;  }
     public int CursusInserts { get; set;  }
     public int InstantieInserts { get; set;  }
+
+    public DateTime BeginFilter { get; set; } = DateTime.Today.AddMonths(-6);
+
+    public DateTime EindFilter { get; set; } = DateTime.Today;
     
     [Required(ErrorMessage = "Bestand kan niet worden gevonden.")]
     public IFormFile File { get; set;  }
