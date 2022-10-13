@@ -5,19 +5,32 @@ namespace CASbackend.Test.Controllers;
 
 public class CursusMockRepository : ICursusRepository
 {
-    public IEnumerable<CursusInstantie> GetAllCursusInstanties(int weeknummer)
+    public IEnumerable<CursusInstantie> GetAllCursusInstanties(int week, int jaar)
     {
-        return new[]
+        switch (jaar)
         {
-            new CursusInstantie(
-                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                new DateTime(2022, 10, 11)
-            ),
-            new CursusInstantie(
-                new Cursus("JAVA", "Programming in Java", 5),
-                new DateTime(2022, 10, 11)
-            )
-        };
+            case 2021:
+                return new[]
+                {
+                    new CursusInstantie(
+                        new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                        new DateTime(2021, 10, 11)
+                    )
+                };
+            default:
+                return new[]
+                {
+                    new CursusInstantie(
+                        new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                        new DateTime(2022, 10, 11)
+                    ),
+                    new CursusInstantie(
+                        new Cursus("JAVA", "Programming in Java", 5),
+                        new DateTime(2022, 10, 11)
+                    )
+                };
+        }
+        
     }
 
     public OutFileUpload CreateCursusInstanties(IEnumerable<CursusInstantie> instanties)

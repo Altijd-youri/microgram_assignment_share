@@ -11,6 +11,27 @@ public class CursusRepositoryTest
     private readonly DbContextOptions<CursusContext> _options;
     private readonly SqliteConnection _connection;
 
+    private static readonly IEnumerable<Cursus> Cursussen = new Cursus[]
+    {
+        new ("ASPNET", "Programming in ASP.NET", 5),
+        new ("JAVA", "Programming in Java", 5)
+    };
+    private static readonly IEnumerable<CursusInstantie> Instanties = new CursusInstantie[]
+    {
+        new (
+            Cursussen.Single(c => c.Code == "ASPNET"),
+            new DateTime(2021, 10, 11)
+        ),
+        new (
+            Cursussen.Single(c => c.Code == "ASPNET"),
+            new DateTime(2022, 10, 10)
+        ),
+        new (
+            Cursussen.Single(c => c.Code == "JAVA"),
+            new DateTime(2022, 10, 9)
+        )
+    };
+
     public CursusRepositoryTest()
     {
         _connection = new SqliteConnection("Filename=:memory:");
@@ -26,27 +47,16 @@ public class CursusRepositoryTest
 
     #region GetAllCursusInstanties
     [TestMethod]
-    public void GetAllCursusInstanties_Week40_ReturnsCurssusen()
+    public void GetAllCursusInstanties_Week41AndJaar2022_ReturnsCursussen()
     {
         using (var context = new CursusContext(_options))
         {
-            var instanties = new CursusInstantie[]
-            {
-                new (
-                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                new DateTime(2022, 10, 10)
-                ),
-                new (
-                    new Cursus("JAVA", "Programming in Java", 5),
-                    new DateTime(2022, 10, 9)
-                )
-            };
-            context.CursusInstanties.AddRange(instanties);
+            context.CursusInstanties.AddRange(Instanties);
             context.SaveChanges();
         }
         var sut = new CursusRepository(_options);
 
-        var result = sut.GetAllCursusInstanties(41);
+        var result = sut.GetAllCursusInstanties(41, 2022);
         
         Assert.AreEqual(1, result.Count());
         Assert.IsTrue(result.Any(ci =>
@@ -56,32 +66,40 @@ public class CursusRepositoryTest
     }
     
     [TestMethod]
-    public void GetAllCursusInstanties_Week40_ReturnsCursussen()
+    public void GetAllCursusInstanties_Week40AndJaar2022_ReturnsCursussen()
     {
         using (var context = new CursusContext(_options))
         {
-            var instanties = new CursusInstantie[]
-            {
-                new (
-                    new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                    new DateTime(2022, 10, 10)
-                ),
-                new (
-                    new Cursus("JAVA", "Programming in Java", 5),
-                    new DateTime(2022, 10, 9)
-                )
-            };
-            context.CursusInstanties.AddRange(instanties);
+            context.CursusInstanties.AddRange(Instanties);
             context.SaveChanges();
         }
         var sut = new CursusRepository(_options);
 
-        var result = sut.GetAllCursusInstanties(40);
+        var result = sut.GetAllCursusInstanties(40, 2022);
         
         Assert.AreEqual(1, result.Count());
         Assert.IsTrue(result.Any(ci =>
             ci.StartDatum.Year == 2022 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 9 &&
             ci.Cursus.Code == "JAVA" && ci.Cursus.Titel == "Programming in Java" && ci.Cursus.Duur == 5
+        ));
+    }
+    
+    [TestMethod]
+    public void GetAllCursusInstanties_Week41AndJaar2021_ReturnsCursussen()
+    {
+        using (var context = new CursusContext(_options))
+        {
+            context.CursusInstanties.AddRange(Instanties);
+            context.SaveChanges();
+        }
+        var sut = new CursusRepository(_options);
+
+        var result = sut.GetAllCursusInstanties(41, 2021);
+        
+        Assert.AreEqual(1, result.Count());
+        Assert.IsTrue(result.Any(ci =>
+            ci.StartDatum.Year == 2021 && ci.StartDatum.Month == 10 && ci.StartDatum.Day == 11 &&
+            ci.Cursus.Code == "ASPNET" && ci.Cursus.Titel == "Programming in ASP.NET" && ci.Cursus.Duur == 5
         ));
     }
     #endregion
@@ -128,7 +146,7 @@ public class CursusRepositoryTest
     public void CreateCursusInstanties_InsertsOne_OnDuplicateEntries()
     {
         var sut = new CursusRepository(_options);
-        var instanties = new CursusInstantie[]
+        var duplicates = new CursusInstantie[]
         {
             new (
                 new Cursus("ASPNET", "Programming in ASP.NET", 5), 
@@ -140,7 +158,7 @@ public class CursusRepositoryTest
             )
         };
         
-        sut.CreateCursusInstanties(instanties);
+        sut.CreateCursusInstanties(duplicates);
         
         using (var context = new CursusContext(_options))
         {
@@ -158,7 +176,7 @@ public class CursusRepositoryTest
     public void CreateCursusInstanties_InsertsTwo_OnDuplicateCursusWithDifferentDate()
     {
         var sut = new CursusRepository(_options);
-        var instanties = new CursusInstantie[]
+        var duplicatesWithDiffrentDates = new CursusInstantie[]
         {
             new (
                 new Cursus("ASPNET", "Programming in ASP.NET", 5), 
@@ -170,7 +188,7 @@ public class CursusRepositoryTest
             )
         };
         
-        sut.CreateCursusInstanties(instanties);
+        sut.CreateCursusInstanties(duplicatesWithDiffrentDates);
         
         using (var context = new CursusContext(_options))
         {

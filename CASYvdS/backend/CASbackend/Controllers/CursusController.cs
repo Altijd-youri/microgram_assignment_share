@@ -15,10 +15,10 @@ namespace CASbackend.Controllers
             _CursusRepository = cursusRepository;
         }
 
-        [HttpGet("week/{weeknummer}")]
-        public IEnumerable<CursusInstantie> GetCursusInstanties(int weeknummer)
+        [HttpGet("{jaar}/{week}")]
+        public IEnumerable<CursusInstantie> GetCursusInstanties(int week, int jaar)
         {
-            return _CursusRepository.GetAllCursusInstanties(weeknummer);
+            return _CursusRepository.GetAllCursusInstanties(week, jaar);
         }
     }
 }

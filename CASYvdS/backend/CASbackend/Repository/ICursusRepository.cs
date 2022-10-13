@@ -4,7 +4,7 @@ namespace CASbackend.Repository;
 
 public interface ICursusRepository
 {
-    IEnumerable<CursusInstantie> GetAllCursusInstanties(int weeknummer);
+    IEnumerable<CursusInstantie> GetAllCursusInstanties(int week, int jaar);
 
     OutFileUpload CreateCursusInstanties(IEnumerable<CursusInstantie> instanties);
 }
