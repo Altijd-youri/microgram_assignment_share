@@ -63,7 +63,7 @@ namespace CASwebsite.Controllers
             var outModel = new FileUpload();
             if (inModel.File == null)
             {
-                outModel.Message = "";
+                outModel.Message = "Geen bestand gevonden.";
                 outModel.IsValid = false;
             }
             else

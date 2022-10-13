@@ -122,6 +122,29 @@ public class CursusControllerTest
 
         Assert.IsInstanceOfType(result, typeof(ViewResult));
     }
+    
+    [TestMethod]
+    public void CreatePost_ReturnsFileUpload()
+    {
+        var file = new FileUpload();
+            
+        var response = _sut.Create(file);
+        var result = ((ViewResult)response.Result).Model;
+
+        Assert.IsInstanceOfType(result, typeof(FileUpload));
+    }
+    
+    [TestMethod]
+    public void CreatePost_WithoutFile_ReturnCorrectFileUploadModel()
+    {
+        var file = new FileUpload();
+            
+        var response = _sut.Create(file);
+        FileUpload result = (FileUpload) ((ViewResult)response.Result).Model!;
+
+        Assert.AreEqual("Geen bestand gevonden.", result.Message);
+        Assert.AreEqual(false, result.IsValid);
+    }
 
     [TestMethod]
     public void Base_ReturnsViewResult()
