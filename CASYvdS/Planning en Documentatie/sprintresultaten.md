@@ -1,2 +1,9 @@
-# Sprint 1 review
-![Screenshot van Miro board na sprint 1](files/sprint_review_1.jpg)
+![](files/sprint_review_1.jpg)
+
+![](files/Case 1 CAS.jpg)
+
+![](files/Case 1 CAS(1).jpg)
+
+![](files/Case 1 CAS(2).jpg)
+
+![](files/Case 1 CAS(3).jpg)

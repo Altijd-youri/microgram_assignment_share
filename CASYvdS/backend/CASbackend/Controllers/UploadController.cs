@@ -90,7 +90,7 @@ public class UploadController : ControllerBase
             }
             
             var instantiesFilteredByDateRange = instanties
-                .Where(ci => ci.StartDatum >= inFile.BeginFilter && ci.StartDatum <= inFile.EindFilter);
+                .Where(ci => ci.StartDatum > inFile.BeginFilter && ci.StartDatum <= inFile.EindFilter);
 
             status = _CursusRepository.CreateCursusInstanties(instantiesFilteredByDateRange);
             status.IsValid = true;
