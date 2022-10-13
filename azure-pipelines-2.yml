@@ -4,7 +4,7 @@ trigger:
     - master
   paths:
     include:
-    - CASYvdS//frontend/CASwebsite/*
+    - CASYvdS/frontend/CASwebsite/*
 
 pool:
   vmImage: ubuntu-latest
