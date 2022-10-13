@@ -17,31 +17,50 @@ public class MockCursusAgent : ICursusAgent
             new DateTime(2022, 10, 9)
         )
     };
-    public IEnumerable<CursusInstantie> GetCursusInstanties(int weeknummer)
+    public IEnumerable<CursusInstantie> GetCursusInstanties(int week, int jaar)
     {
-        switch (weeknummer)
+        switch (jaar)
         {
-            case 1:
-                return _list;
-            case 40:
-                return new List<CursusInstantie>()
+            case 2021:
+                switch (week)
                 {
-                    new (
-                        new Cursus("JAVA", "Programming in Java", 5),
-                        new DateTime(2022, 10, 9)
-                    )
-                };
-            case 41:
-                return new List<CursusInstantie>()
-                {
-                    new (
-                        new Cursus("ASPNET", "Programming in ASP.NET", 5), 
-                        new DateTime(2022, 10, 10)
-                    )
-                };
+                    case 41:
+                        return new List<CursusInstantie>()
+                        {
+                            new (
+                                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                                new DateTime(2021, 10, 11)
+                            )
+                        };
+                    default:
+                        return new List<CursusInstantie>();
+                }
             default:
-                return new List<CursusInstantie>();
+                switch (week)
+                {
+                    case 1:
+                        return _list;
+                    case 40:
+                        return new List<CursusInstantie>()
+                        {
+                            new (
+                                new Cursus("JAVA", "Programming in Java", 5),
+                                new DateTime(2022, 10, 9)
+                            )
+                        };
+                    case 41:
+                        return new List<CursusInstantie>()
+                        {
+                            new (
+                                new Cursus("ASPNET", "Programming in ASP.NET", 5), 
+                                new DateTime(2022, 10, 10)
+                            )
+                        };
+                    default:
+                        return new List<CursusInstantie>();
+                }
         }
+        
     }
 
     public FileUpload UploadFile(FileUpload planning)

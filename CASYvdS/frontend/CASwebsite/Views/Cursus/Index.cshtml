@@ -12,19 +12,18 @@
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
-                <div class="col-12 form-group">
-                    <label asp-for="Weeknummer" class="control-label"></label>
-                </div>
                 <div class="col-6 form-group mb-3">
                     <div class="input-group mb-3">
-                        <input asp-for="Weeknummer" class="form-control" type="number" min="1" max="53"/>
+                        <input asp-for="Weeknummer.Jaar" class="form-control" type="number" min="2000" max="9999"/>
+                        <input asp-for="Weeknummer.Week" class="form-control" type="number" min="1" max="@Model.Weeknummer.WeekInJaar"/>
                         <button type="submit" class="btn btn-primary">Selecteren</button>
                     </div>
-                    <span asp-validation-for="Weeknummer" class="text-danger"></span>
+                    <span asp-validation-for="Weeknummer.Jaar" class="text-danger"></span>
+                    <span asp-validation-for="Weeknummer.Week" class="text-danger"></span>
                 </div>
                 <div class="col-6 form-group mb-3">
-                    <a href="/cursusoverzicht/@Model.VorigeWeek" class="btn btn-primary">Vorige week</a>
-                    <a href="/cursusoverzicht/@Model.VolgendeWeek" class="btn btn-primary">Volgende week</a>
+                    <a href="/cursusoverzicht/@Model.VorigeWeek.Jaar/@Model.VorigeWeek.Week" class="btn btn-primary">Vorige week</a>
+                    <a href="/cursusoverzicht/@Model.VolgendeWeek.Jaar/@Model.VolgendeWeek.Week" class="btn btn-primary">Volgende week</a>
                 </div>
             </div>
         </form>

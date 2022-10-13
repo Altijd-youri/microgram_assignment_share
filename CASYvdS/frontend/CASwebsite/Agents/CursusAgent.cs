@@ -13,10 +13,10 @@ public class CursusAgent : ICursusAgent
         _baseUrl = baseUrl;
     }
     
-    public IEnumerable<CursusInstantie> GetCursusInstanties(int weeknummer)
+    public IEnumerable<CursusInstantie> GetCursusInstanties(int week, int jaar)
     {
         var result = _baseUrl
-            .AppendPathSegment($"api/cursus/week/{weeknummer}")
+            .AppendPathSegment($"api/cursus/{jaar}/{week}")
             .GetJsonAsync<IEnumerable<CursusInstantie>>()
             .Result;
         return result;

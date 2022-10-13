@@ -14,30 +14,40 @@ namespace CASwebsite.Controllers
             _CursusAgent = cursusAgent;
         }
 
-        [HttpGet]
+        [HttpGet("")]
+        [HttpGet("cursusoverzicht")]
         public ActionResult Base()
         {
-            var weeknummer = GetWeeknummer(DateTime.Today);
-            return RedirectToAction("Index", new { weeknummer });
+            var today = DateTime.Today;
+            var week = ISOWeek.GetWeekOfYear(today);
+            var jaar = ISOWeek.GetYear(today);
+            
+            return RedirectToAction("Index", new { jaar, week });
         }
 
-        [HttpGet("cursusoverzicht/{weeknummer:int}")]
-        [HttpGet("cursusoverzicht")]
-        public ActionResult Index(int weeknummer)
+        [HttpGet("cursusoverzicht/{jaar:int}/{week:int}")]
+        public ActionResult Index(int week, int jaar)
         {
-            weeknummer = (weeknummer != 0) ? weeknummer : GetWeeknummer(DateTime.Today);
-            var model = new CursusLijst(
-                weeknummer,
-                _CursusAgent.GetCursusInstanties(weeknummer)
-            );
-            return View(model);
+            try
+            {
+                var weeknumber = new Weeknumber(week, jaar);
+                var model = new CursusLijst(weeknumber, _CursusAgent.GetCursusInstanties(weeknumber.Week, weeknumber.Jaar));
+                return View(model);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest("Jaar en week buiten het valide bereik.");
+            }
         }
 
-        [HttpPost("cursusoverzicht/{weeknummer:int}")]
+        [HttpPost("cursusoverzicht/{jaar:int}/{week:int}")]
         [HttpPost("cursusoverzicht")]
         public ActionResult Index(CursusLijst model)
         {
-            return RedirectToAction("Index", new { weeknummer=model.Weeknummer });
+            var week = model.Weeknummer.Week;
+            var jaar = model.Weeknummer.Jaar;
+            
+            return RedirectToAction("Index", new { jaar, week });
         }
         
         public ActionResult Create()

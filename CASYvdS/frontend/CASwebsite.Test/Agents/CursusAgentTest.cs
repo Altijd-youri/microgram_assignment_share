@@ -32,18 +32,19 @@ public class OrderAgentTest : IDisposable
             new { Ordernummer=2, Datum="2022-10-10T00:00:00" },
         });
         var sut = new CursusAgent("http://test.url");
-        var weeknummber = 1;
+        var week = 1;
+        var jaar = 2022;
         
-        sut.GetCursusInstanties(weeknummber);
+        sut.GetCursusInstanties(week, jaar);
         
-        _httpTest.ShouldHaveCalled("http://test.url/api/cursus/week/1");
+        _httpTest.ShouldHaveCalled("http://test.url/api/cursus/2022/1");
     }
 
     [TestMethod]
     public void GetCursusInstanties_ReturnsListCurusInstanties()
     {
         _httpTest.RespondWithJson( new [] {
-            new {
+             new {
                 Id=200,
                 Cursus= new {
                     Id=2,
@@ -65,9 +66,10 @@ public class OrderAgentTest : IDisposable
             }
         });
         var sut = new CursusAgent("http://test.url");
-        var nonImportantWeeknumber = 1;
+        var WeekImportantForMock = 1;
+        var JaarImportantForMock = 2022;
         
-        var result = sut.GetCursusInstanties(nonImportantWeeknumber);
+        var result = sut.GetCursusInstanties(WeekImportantForMock, JaarImportantForMock);
         
         Assert.AreEqual(2, result.Count());
         Assert.IsTrue(result.Any(ci =>
