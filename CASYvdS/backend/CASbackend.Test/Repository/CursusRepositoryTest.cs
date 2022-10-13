@@ -32,6 +32,11 @@ public class CursusRepositoryTest
         )
     };
 
+    private static readonly CursusInstantie Instantie = new(
+        Cursussen.Single(c => c.Code == "ASPNET"),
+        new DateTime(2022, 10, 10)
+    );
+
     public CursusRepositoryTest()
     {
         _connection = new SqliteConnection("Filename=:memory:");
@@ -205,6 +210,41 @@ public class CursusRepositoryTest
             Assert.IsTrue(startDatum10Exists);
             Assert.IsTrue(startDatum17Exists);
         }
+    }
+    #endregion
+    
+    #region GetCursusInstantie
+    [TestMethod]
+    public void GetAllCursusInstantie_ReturnsCursusInstantie()
+    {
+        using (var context = new CursusContext(_options))
+        {
+            context.CursusInstanties.Add(Instantie);
+            context.SaveChanges();
+        }
+        var sut = new CursusRepository(_options);
+
+        var result = sut.GetCursusInstantie("ASPNET", "10-10-2022");
+        
+        Assert.IsTrue(
+            result.StartDatum.Year == 2022 && result.StartDatum.Month == 10 && result.StartDatum.Day == 10 &&
+            result.Cursus.Code == "ASPNET" && result.Cursus.Titel == "Programming in ASP.NET" && result.Cursus.Duur == 5
+        );
+    }
+    
+    [TestMethod]
+    public void GetAllCursusInstantie_ReturnsNullOnNonExistingCursusInstantie()
+    {
+        using (var context = new CursusContext(_options))
+        {
+            context.CursusInstanties.Add(Instantie);
+            context.SaveChanges();
+        }
+        var sut = new CursusRepository(_options);
+
+        var result = sut.GetCursusInstantie("NONEXISTENT", "10-10-2022");
+        
+        Assert.AreEqual(null, result);
     }
     #endregion
 }

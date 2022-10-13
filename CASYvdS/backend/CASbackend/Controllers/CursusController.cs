@@ -16,9 +16,18 @@ namespace CASbackend.Controllers
         }
 
         [HttpGet("{jaar}/{week}")]
-        public IEnumerable<CursusInstantie> GetCursusInstanties(int week, int jaar)
+        public ActionResult GetCursusInstanties(int week, int jaar)
         {
-            return _CursusRepository.GetAllCursusInstanties(week, jaar);
+            IEnumerable<CursusInstantie> instanties = _CursusRepository.GetAllCursusInstanties(week, jaar);
+            return Ok(instanties);
+        }
+        
+        [HttpGet("details/{code}/{datum}")]
+        public ActionResult GetCursusInstantie(string code, string datum)
+        {
+            CursusInstantie? instantie = _CursusRepository.GetCursusInstantie(code, datum);
+            if (instantie != null) return Ok(instantie);
+            return NotFound();
         }
     }
 }

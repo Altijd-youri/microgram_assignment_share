@@ -7,6 +7,7 @@ namespace CASbackend.Repository;
 public class CursusRepository : ICursusRepository
 {
     private readonly DbContextOptions<CursusContext> _options;
+    private static readonly CultureInfo CultureInfo = new("nl-NL");
     
     public CursusRepository(DbContextOptions<CursusContext> options)
     {
@@ -64,5 +65,15 @@ public class CursusRepository : ICursusRepository
         }
         context.SaveChanges();
         return status;
+    }
+
+    public CursusInstantie? GetCursusInstantie(string code, string datum)
+    {
+        using var context = new CursusContext(_options);
+        var startDatum = DateTime.Parse(datum, CultureInfo);
+
+        return context.CursusInstanties
+            .Include(ci => ci.Cursus)
+            .SingleOrDefault(ci => ci.StartDatum == startDatum && ci.CursusCode == code);
     }
 }
