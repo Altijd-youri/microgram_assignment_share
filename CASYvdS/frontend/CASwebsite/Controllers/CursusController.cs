@@ -57,35 +57,29 @@ namespace CASwebsite.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Create(FileUpload planning)
+        public async Task<IActionResult> Create(FileUpload inModel)
         {
-            const int twoMb = 2097152;
-            var model = new FileUpload();
-            if (planning.File == null)
+            var outModel = new FileUpload();
+            if (inModel.File == null)
             {
-                model.Message = "";
-                model.IsValid = false;
+                outModel.Message = "";
+                outModel.IsValid = false;
             }
             else
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await planning.File.CopyToAsync(memoryStream);
-                    if (memoryStream.Length < twoMb)
+                    await inModel.File.CopyToAsync(memoryStream);
+                    var modelForBackend = new FileUpload()
                     {
-                        var file = new FileUpload()
-                        {
-                            Content = memoryStream.ToArray()
-                        };
-                        model = _CursusAgent.UploadFile(file);
-                    }
-                    else
-                    {
-                        Console.WriteLine("File is too large.");
-                    }
+                        Content = memoryStream.ToArray(),
+                        BeginFilter = inModel.BeginFilter,
+                        EindFilter = inModel.EindFilter
+                    };
+                    outModel = _CursusAgent.UploadFile(modelForBackend);
                 }
             }
-            return View(model);
+            return View(outModel);
         }
 
         public IActionResult Details()

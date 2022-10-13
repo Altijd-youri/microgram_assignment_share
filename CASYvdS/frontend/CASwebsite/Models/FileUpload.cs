@@ -13,9 +13,9 @@ public record FileUpload
     public int CursusInserts { get; set;  }
     public int InstantieInserts { get; set;  }
 
-    public DateTime BeginFilter { get; set; } = DateTime.Today.AddMonths(-6);
+    public DateTime BeginFilter { get; set; } = DateTime.Today;
 
-    public DateTime EindFilter { get; set; } = DateTime.Today;
+    public DateTime EindFilter { get; set; } = DateTime.Today.AddMonths(6);
     
     [Required(ErrorMessage = "Bestand kan niet worden gevonden.")]
     public IFormFile File { get; set;  }
