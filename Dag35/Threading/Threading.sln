@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads0", "Threads0\Threads0.csproj", "{A1D177BE-AEA0-4B4A-B54A-EC1A70A487EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads0.Test", "Threads0.Test\Threads0.Test.csproj", "{629B8930-076C-4A84-A1DE-D6F16D85932C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1D177BE-AEA0-4B4A-B54A-EC1A70A487EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D177BE-AEA0-4B4A-B54A-EC1A70A487EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D177BE-AEA0-4B4A-B54A-EC1A70A487EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D177BE-AEA0-4B4A-B54A-EC1A70A487EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629B8930-076C-4A84-A1DE-D6F16D85932C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629B8930-076C-4A84-A1DE-D6F16D85932C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629B8930-076C-4A84-A1DE-D6F16D85932C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629B8930-076C-4A84-A1DE-D6F16D85932C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
