@@ -15,9 +15,10 @@ variables:
   applicationPath: $(projectPath)/OrderBackend
   dockerRegistryServiceConnection: 'minorRegistry'
   imageRepository: 'yvds-dag20-orderbackend'
-
-steps:
-
+jobs:
+- job:
+  displayName: "Build and package"
+  steps:
   - task: DotNetCoreCLI@2
     displayName: Build project
     inputs:
@@ -47,3 +48,24 @@ steps:
       command: 'buildAndPush'
       Dockerfile: '$(applicationPath)/Dockerfile'
       tags: '1'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '/dockerimage'
+      ArtifactName: 'docker image'
+      publishLocation: 'Container'
+- job:
+  displayName: "Run the console"
+  steps:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      buildType: 'current'
+      artifactName: 'docker image'
+      targetPath: '$(Pipeline.Workspace)'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: 'Write-Host "Hello World"'
+
+
+
+
