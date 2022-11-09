@@ -4,13 +4,13 @@ namespace Threads0;
 
 public class RightAngels
 {
-    public bool IsRightAngle(int a, int b, int c)
+    public bool IsRightAngle_VariantA(int a, int b, int c)
     {
         SlowMath math = new SlowMath();
 
-        var aSquareAsyncResult = math.BeginSquare(a, SquareResult, math);
-        var bSquareAsyncResult = math.BeginSquare(b, SquareResult, math);
-        var cSquareAsyncResult = math.BeginSquare(c, SquareResult, math);
+        var aSquareAsyncResult = math.BeginSquare(a, null, null);
+        var bSquareAsyncResult = math.BeginSquare(b,null, null);
+        var cSquareAsyncResult = math.BeginSquare(c, null, null);
 
         var aSquare = math.EndSquare(aSquareAsyncResult);
         var bSquare = math.EndSquare(bSquareAsyncResult);
@@ -19,11 +19,35 @@ public class RightAngels
         return aSquare + bSquare == cSquare;
     }
 
-    private void SquareResult(IAsyncResult ar)
+    public bool IsRightAngle_VariantB(int a, int b, int c)
     {
-        Console.WriteLine("this ran");
-        SlowMath? math = ar.AsyncState as SlowMath;
+        int aSquare = 0;
+        int bSquare = 0;
+        int cSquare = 0;
         
-        Console.WriteLine(math.EndSquare(ar)); 
+        Thread threadA = new Thread(() => SquareHelper_VariantB(a, out aSquare));
+        Thread threadB = new Thread(() => SquareHelper_VariantB(b, out bSquare));
+        Thread threadC = new Thread(() => SquareHelper_VariantB(c, out cSquare));
+        threadA.Start();
+        threadB.Start();
+        threadC.Start();
+        
+        threadA.Join();
+        threadB.Join();
+        threadC.Join();
+        
+        return aSquare + bSquare == cSquare;
+    }
+
+    private void SquareHelper_VariantB(int number, out int result)
+    {
+        SlowMath math = new SlowMath();
+        result = math.Square(number);
+    }
+
+
+    public bool IsRightAngle_VariantC(int a, int b, int c)
+    {
+        return false;
     }
 }
