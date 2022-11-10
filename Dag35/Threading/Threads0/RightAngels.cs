@@ -48,6 +48,6 @@ public class RightAngels
 
     public bool IsRightAngle_VariantC(int a, int b, int c)
     {
-        return false;
+        throw new NotImplementedException();
     }
 }
