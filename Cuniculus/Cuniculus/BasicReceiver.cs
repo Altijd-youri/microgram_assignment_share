@@ -69,11 +69,20 @@ public class BasicReceiver : IBasicReceiver
             {
                 var message = Encoding.Unicode.GetString(ea.Body.ToArray());
                 var eventMessage = new EventMessage(ea.RoutingKey, message);
-            
-                handler.Invoke(eventMessage);
+                var deliveryTag = ea.DeliveryTag;
+                try
+                {
+                    handler.Invoke(eventMessage);
+                    channel.BasicAck(deliveryTag, false);
+                }
+                catch (Exception e)
+                {
+                    channel.BasicNack(deliveryTag, false, true);
+                }
+                
             };
             channel.BasicConsume(queue: _context.Options.QueueName,
-                autoAck: true,
+                autoAck: false,
                 consumer: consumer);
             _startedReceivingFinished = true;
         }

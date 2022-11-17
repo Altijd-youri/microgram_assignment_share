@@ -35,11 +35,7 @@ public class BasicReceiverTest
     public void SetupQueue_DeclaresAPersistentRabbitMQQueue()
     {
         var sut = new BasicReceiver(_contextMock.Object);
-        var topics = new List<string>()
-        {
-            "behaviour",
-            "health"
-        };
+        var topics = new List<string> { "health" };
         
         sut.SetupQueue(topics);
 
@@ -90,11 +86,7 @@ public class BasicReceiverTest
     public void SetupQueue_ThrowsCuniculusException_IfCalledMoreThanOnce()
     {
         var sut = new BasicReceiver(_contextMock.Object);
-        var topics = new List<string>()
-        {
-            "behaviour",
-            "health"
-        };
+        var topics = new List<string> { "health" };
         
         sut.SetupQueue(topics);
         Action shouldThrowException = () => sut.SetupQueue(topics);
@@ -108,7 +100,7 @@ public class BasicReceiverTest
     {
         IBasicConsumer consumer = null;
         _channelMock.Setup(channel => channel.BasicConsume(
-            "European", true, "", false, false, null, It.IsAny<IBasicConsumer>()))
+            "European", It.IsAny<bool>(), "", false, false, null, It.IsAny<IBasicConsumer>()))
             .Callback((string _, bool _, string _, bool _, bool _, IDictionary<string, object> _, IBasicConsumer innerConsumer) =>
             {
                 consumer = innerConsumer;
@@ -122,11 +114,7 @@ public class BasicReceiverTest
         };
         var sut = new BasicReceiver(_contextMock.Object);
         var messageBytes = Encoding.Unicode.GetBytes("{ name: 'Oryctolagus cuniculus' }");
-        var topics = new List<string>()
-        {
-            "behaviour",
-            "health"
-        };
+        var topics = new List<string> { "health" };
         sut.SetupQueue(topics);
         
         sut.StartReceiving(handler);
@@ -142,23 +130,19 @@ public class BasicReceiverTest
     {
         IBasicConsumer consumer = null;
         _channelMock.Setup(channel => channel.BasicConsume(
-                "European", true, "", false, false, null, It.IsAny<IBasicConsumer>()))
+                "European", It.IsAny<bool>(), "", false, false, null, It.IsAny<IBasicConsumer>()))
             .Callback((string _, bool _, string _, bool _, bool _, IDictionary<string, object> _, IBasicConsumer innerConsumer) =>
             {
                 consumer = innerConsumer;
             });
         var sut = new BasicReceiver(_contextMock.Object);
-        var topics = new List<string>()
-        {
-            "behaviour",
-            "health"
-        };
+        var topics = new List<string> { "health" };
         Action<EventMessage> handler = (eventMessage) => { };
         sut.SetupQueue(topics);
         
         sut.StartReceiving(handler);
         
-        Assert.IsNotNull(consumer);
+        Assert.IsNotNull(consumer, "Consumer is null");
         Assert.IsInstanceOfType(consumer, typeof(IBasicConsumer));
     }
     
@@ -188,5 +172,33 @@ public class BasicReceiverTest
         
         var thrownException = Assert.ThrowsException<CuniculusException>(shouldThrowException);
         Assert.AreEqual("SetupQueue not finished.", thrownException.Message);
+    }
+
+    [TestMethod]
+    public void StartReceivingHandler_Nack_IfExpectionIsThrownInHandler()
+    {
+        IBasicConsumer consumer = null;
+        _channelMock.Setup(channel => channel.BasicConsume(
+                "European", It.IsAny<bool>(), "", false, false, null, It.IsAny<IBasicConsumer>()))
+            .Callback((string _, bool _, string _, bool _, bool _, IDictionary<string, object> _, IBasicConsumer innerConsumer) =>
+            {
+                consumer = innerConsumer;
+            });
+        bool handlerCalled = false;
+        Action<EventMessage> handler = (eventMessage) =>
+        {
+            handlerCalled = true;
+            throw new Exception();
+        };
+        var sut = new BasicReceiver(_contextMock.Object);
+        var messageBytes = Encoding.Unicode.GetBytes("");
+        var topics = new List<string> { "health" };
+        sut.SetupQueue(topics);
+        
+        sut.StartReceiving(handler);
+        consumer?.HandleBasicDeliver("", 1000, false, "Bunnies", "health", null, messageBytes);
+
+        Assert.IsTrue(handlerCalled, "Handler was not called.");
+        _channelMock.Verify(channel => channel.BasicNack(1000, false, true), Times.Once);
     }
 }
