@@ -15,7 +15,6 @@ public class BasicSender : IBasicSender
     {
         var messageBytes = Encoding.Unicode.GetBytes(message.Body);
         var channel = _context.CreateChannel();
-        Console.WriteLine(Encoding.Unicode.GetString(messageBytes));
         channel.BasicPublish(_context.Options.ExchangeName, message.Topic,false,null,messageBytes);
     }
 }
