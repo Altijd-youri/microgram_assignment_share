@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>altijd_youri.cuniculus</PackageId>
-        <Version>0.5.1</Version>
+        <Version>0.5.2</Version>
         <Authors>Youri van der Star (Altijd_Youri)</Authors>
         <Product>Cuniculus</Product>
         <PackageDescription>A basic wrapper for RabbitMQ.</PackageDescription>
