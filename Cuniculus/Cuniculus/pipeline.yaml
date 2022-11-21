@@ -28,13 +28,18 @@ steps:
       projects: '$(projectParentPath)/**/*.Test/*.csproj'
       arguments: '-c $(buildConfiguration)'
   - task: DotNetCoreCLI@2
-    displayName: create nuget package
+    displayName: create nuget package (dotnet)
     inputs:
       command: 'pack'
       packagesToPack: '$(projectPath)/**/*.csproj'
       nobuild: true
       versioningScheme: 'off'
-
+  - task: NuGetCommand@2
+    displayName: create nuget package (nuget)
+    inputs:
+      command: 'pack'
+      packagesToPack: '$(projectPath)/**/*.csproj'
+      versioningScheme: 'off'
   - task: NuGetCommand@2
     displayName: push to nuget feed
     inputs:
