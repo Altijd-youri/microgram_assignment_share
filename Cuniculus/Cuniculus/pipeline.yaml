@@ -4,11 +4,11 @@ trigger:
       - master
   paths:
     include:
-      - Cuniculus/Cuniculus/*
+      - Cuniculus/*
 
 variables:
   buildConfiguration: Release
-  projectPath: Cuniculus/Cuniculus
+  projectPath: Cuniculus
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -33,13 +33,9 @@ steps:
       packagesToPack: '$(projectPath)/**/*.csproj'
       nobuild: true
       versioningScheme: 'off'
+
   - task: NuGetCommand@2
-    inputs:
-      command: 'restore'
-      restoreSolution: '$(projectPath)/**/*.csproj'
-      feedsToUse: 'select'
-      vstsFeed: '743e2c69-63aa-426d-895c-02fc1ee82026/cbd6ff65-1137-4897-a6e3-477a48b11394'
-  - task: NuGetCommand@2
+    displayName: push to nuget feed
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
