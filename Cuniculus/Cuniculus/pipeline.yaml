@@ -8,7 +8,8 @@ trigger:
 
 variables:
   buildConfiguration: Release
-  projectPath: Cuniculus
+  projectPath: Cuniculus/Cuniculus
+  projectParentPath: Cuniculus
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -18,13 +19,13 @@ steps:
     displayName: build all
     inputs:
       command: 'build'
-      projects: '$(projectPath)/**/*.csproj'
+      projects: '$(projectParentPath)/**/*.csproj'
       arguments: '-c $(buildConfiguration)'
   - task: DotNetCoreCLI@2
     displayName: run tests
     inputs:
       command: 'test'
-      projects: '$(projectPath)/**/*.Test/*.csproj'
+      projects: '$(projectParentPath)/**/*.Test/*.csproj'
       arguments: '-c $(buildConfiguration)'
   - task: DotNetCoreCLI@2
     displayName: create nuget package
