@@ -1,0 +1,60 @@
+@using Microgram.Frontend.Core.Entities
+
+<MudCard>
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            @if (string.IsNullOrEmpty(Photo.UserName))
+            {
+                <MudAvatar Color="Color.Secondary">Y</MudAvatar>
+            }
+            else
+            {
+                <MudAvatar Color="Color.Secondary">@Photo.UserName[0]</MudAvatar>
+            }
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            @if (string.IsNullOrEmpty(Photo.Title))
+            {
+                <MudText Typo="Typo.body1">Enter a title to preview</MudText>
+                <MudText Typo="Typo.body2">YourUsername - @DateTime.Now</MudText>
+
+            }
+            else
+            {
+                <MudText Typo="Typo.body1">@Photo.Title</MudText>
+                <MudText Typo="Typo.body2">@Photo.UserName - @Photo.CreatedDate</MudText>
+            }
+            <CardHeaderActions>
+                <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" Href='@($"/photo/edit/{Photo.Id}")' />
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Warning" Href='@($"/photo/delete/{Photo.Id}")' />
+            </CardHeaderActions>
+        </CardHeaderContent>
+    </MudCardHeader>
+    @if (Photo.PhotoFile == null || Photo.PhotoFile.Length <= 0)
+    {
+        <MudPaper Width="400px" Height="300px" Class="pa-16 ma-2" Outlined="true" Square="true"/>
+    }
+    else
+    {
+        <MudCardMedia
+            Image='@(Photo.PhotoFile == null ? "" : $"data:{Photo.ImageMimeType};base64,{Convert.ToBase64String(Photo.PhotoFile)}")'
+            Height="300"
+            alt="@Photo.Title"/>
+    }
+
+    <MudCardContent>
+        @if (string.IsNullOrEmpty(Photo.Description))
+        {
+            <MudText Typo="Typo.body2">Enter a description to preview the text.</MudText>
+        }
+        else
+        {
+            <MudText Typo="Typo.body2">@Photo.Description</MudText>
+        }
+
+    </MudCardContent>
+</MudCard>
+@code {
+    [Parameter]
+    public PhotoEntity Photo { get; set; }
+}

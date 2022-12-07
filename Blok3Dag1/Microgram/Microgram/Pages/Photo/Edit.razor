@@ -1,0 +1,50 @@
+@page "/photo/edit/{Id}"
+
+<EditForm Model="@_photo" OnValidSubmit="Submit">
+    <DataAnnotationsValidator/>
+    <MudForm _photo="@_photo" Validation="@Submit" ValidationDelay="0">
+        <MudCardContent>
+            <MudTextField Label="Title" HelperText="Max. 100 characters"
+                          @bind-Value="_photo.Title" For="@(() => _photo.Title)"/>
+
+            <MudTextField @bind-Value="_photo.Description"
+                          For="@(() => _photo.Description)"
+                          Label="Description"/>
+
+            <MudTextField @bind-Value="_photo.UserName"
+                          For="@(() => _photo.UserName)"
+                          Label="Username"/>
+			
+            <MudFileUpload T="IBrowserFile" FilesChanged="UploadFile">
+                <ButtonTemplate Context="btnTemplateContext">
+                    <MudFab HtmlTag="label"
+                            Color="Color.Secondary"
+                            Icon="@Icons.Filled.Image"
+                            Label="Load picture"
+                            for="@btnTemplateContext" />
+                </ButtonTemplate>
+                <SelectedTemplate Context="btnTemplateContext">
+                    @if (btnTemplateContext != null)
+                    {
+                        <MudText>@btnTemplateContext.Name</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Upload a photo</MudText>
+                    }
+                </SelectedTemplate>
+            </MudFileUpload>
+			
+        </MudCardContent>
+
+    </MudForm>
+    <MudCardActions>
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Publish photo</MudButton>
+    </MudCardActions>
+</EditForm>
+
+<MudGrid Spacing="1" Justify="Justify.Center">
+    <MudItem xs="12" sm="6" md="3">
+        <PhotoDetailsComponent Photo="@_photo"></PhotoDetailsComponent>
+    </MudItem>
+</MudGrid>

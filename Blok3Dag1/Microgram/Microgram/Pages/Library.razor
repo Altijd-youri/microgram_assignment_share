@@ -1,0 +1,12 @@
+@page "/"
+@using Frontend.Core.Entities
+
+<MudGrid Spacing="@GridSpacing" Justify="Justify.Center">
+@foreach (PhotoEntity photo in _photos)
+{
+    <MudItem xs="12" sm="6" md="3">
+        <PhotoDetailsComponent Photo="@photo"></PhotoDetailsComponent>
+    </MudItem>
+    
+}
+</MudGrid>

@@ -1,0 +1,14 @@
+@page "/photo/delete/{Id}"
+
+<EditForm Model="@_photo" OnValidSubmit="Submit">
+    <DataAnnotationsValidator/>
+    <MudCardActions>
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Delete photo</MudButton>
+    </MudCardActions>
+</EditForm>
+
+<MudGrid Spacing="1" Justify="Justify.Center">
+    <MudItem xs="12" sm="6" md="3">
+        <PhotoDetailsComponent Photo="@_photo"></PhotoDetailsComponent>
+    </MudItem>
+</MudGrid>
