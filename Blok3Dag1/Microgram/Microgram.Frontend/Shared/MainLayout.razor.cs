@@ -1,4 +1,4 @@
-namespace Microgram.Shared;
+namespace Microgram.Frontend.Shared;
 
 public partial class MainLayout
 {

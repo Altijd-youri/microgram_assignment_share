@@ -61,6 +61,25 @@ public class PhotoController : ControllerBase
         
     }
     
+    [HttpPatch("/photo")]
+    public async Task<ActionResult<PhotoEntity>> PatchPhoto([FromBody] PhotoEntity photo)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                PhotoEntity changedPhoto = await _photoRepository.UpdatePhoto(photo);
+                return Ok(changedPhoto);
+            }
+            catch (ArgumentException e)
+            {
+                return NotFound();
+            }
+
+        }
+        return BadRequest();
+    }
+    
     [HttpPost("/photo")]
     public async Task<ActionResult<PhotoEntity>> PostPhoto([FromBody] PhotoEntity photo)
     {

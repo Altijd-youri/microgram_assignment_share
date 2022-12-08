@@ -2,7 +2,7 @@ using Microgram.Frontend.Core.Entities;
 using Microgram.Frontend.Core.Repository;
 using Microsoft.AspNetCore.Components;
 
-namespace Microgram.Pages;
+namespace Microgram.Frontend.Pages;
 
 public partial class Library
 {

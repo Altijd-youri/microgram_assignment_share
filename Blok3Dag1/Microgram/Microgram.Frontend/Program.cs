@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microgram;
+using Microgram.Frontend;
 using Microgram.Frontend.Core.Repository;
 using Microgram.Frontend.Infrastructure.Repository;
 using MudBlazor.Services;
@@ -12,6 +12,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddMudServices();
 
-builder.Services.AddSingleton<IPhotoRepository, PhotoRepository>();
+builder.Services.AddSingleton<IPhotoRepository>(new PhotoBackendRepository("https://localhost:7222"));
 
 await builder.Build().RunAsync();

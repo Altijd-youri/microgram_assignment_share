@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microgram", "Microgram\Microgram.csproj", "{33A1C9F5-8DFA-4BA1-BB8E-664970808EEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microgram.Frontend", "Microgram.Frontend\Microgram.Frontend.csproj", "{33A1C9F5-8DFA-4BA1-BB8E-664970808EEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microgram.Frontend.Core", "Microgram.Frontend.Core\Microgram.Frontend.Core.csproj", "{5C21C0AF-FAD3-4E04-B4B5-EB21676B828E}"
 EndProject
