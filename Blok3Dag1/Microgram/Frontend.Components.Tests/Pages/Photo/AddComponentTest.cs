@@ -1,8 +1,7 @@
-
 using Bunit;
-using Microgram.Frontend.Core.Repository;
 using Microgram.Frontend.Infrastructure.Repository;
-using Microgram.Frontend.Pages.Photo;
+using Microgram.Frontend.Pages;
+using Microgram.Shared.Core.Repository;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;

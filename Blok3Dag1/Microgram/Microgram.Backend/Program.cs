@@ -1,4 +1,5 @@
 using Microgram.Backend.Infrastructure.Repository;
+using Microgram.Shared.Core.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Microgram.Shared.Core\Microgram.Shared.Core.csproj" />
+    </ItemGroup>
+
 </Project>

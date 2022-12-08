@@ -1,9 +1,8 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Microgram.Frontend.Core.Entities;
+namespace Microgram.Shared.Core.Entities;
 
-public class PhotoEntity
+public class Photo
 {
     public int Id { get; set; }
     

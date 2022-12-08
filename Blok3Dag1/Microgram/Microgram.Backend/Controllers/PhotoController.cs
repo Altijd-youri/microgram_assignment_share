@@ -1,5 +1,5 @@
-using Microgram.Backend.Core.Enitities;
-using Microgram.Backend.Infrastructure.Repository;
+using Microgram.Shared.Core.Entities;
+using Microgram.Shared.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microgram.Backend.Controllers;
@@ -15,13 +15,13 @@ public class PhotoController : ControllerBase
     }
     
     [HttpGet("/api/photo")]
-    public async Task<ActionResult<IEnumerable<PhotoEntity>>> GetPhotoList()
+    public async Task<ActionResult<IEnumerable<Photo>>> GetPhotoList()
     {
         return Ok(await _photoRepository.GetPhotoList());
     }
     
     [HttpGet("/api/photo/{id}")]
-    public async Task<ActionResult<PhotoEntity>> GetPhotoById([FromRoute] string id)
+    public async Task<ActionResult<Photo>> GetPhotoById([FromRoute] string id)
     {
         if (Int32.TryParse(id, out var parsedId))
         {
@@ -44,7 +44,7 @@ public class PhotoController : ControllerBase
         int parsedId;
         if (Int32.TryParse(id, out parsedId))
         {
-            PhotoEntity photoToDelete;
+            Photo photoToDelete;
             try
             {
                 photoToDelete = await _photoRepository.FindById(parsedId);
@@ -61,13 +61,13 @@ public class PhotoController : ControllerBase
     }
     
     [HttpPatch("/api/photo")]
-    public async Task<ActionResult<PhotoEntity>> PatchPhoto([FromBody] PhotoEntity photo)
+    public async Task<ActionResult<Photo>> PatchPhoto([FromBody] Photo photo)
     {
         if (ModelState.IsValid)
         {
             try
             {
-                PhotoEntity changedPhoto = await _photoRepository.UpdatePhoto(photo);
+                Photo changedPhoto = await _photoRepository.UpdatePhoto(photo);
                 return Ok(changedPhoto);
             }
             catch (ArgumentException e)
@@ -80,11 +80,11 @@ public class PhotoController : ControllerBase
     }
     
     [HttpPost("/api/photo")]
-    public async Task<ActionResult<PhotoEntity>> PostPhoto([FromBody] PhotoEntity photo)
+    public async Task<ActionResult<Photo>> PostPhoto([FromBody] Photo photo)
     {
         if (ModelState.IsValid)
         {
-            PhotoEntity newPhoto = await _photoRepository.AddPhoto(photo);
+            Photo newPhoto = await _photoRepository.AddPhoto(photo);
             var url = $"/api/photo/{newPhoto.Id}";
             return Created(url, newPhoto);
         }

@@ -1,11 +1,11 @@
-using Microgram.Frontend.Core.Entities;
-using Microgram.Frontend.Core.Repository;
+using Microgram.Shared.Core.Entities;
+using Microgram.Shared.Core.Repository;
 
 namespace Microgram.Frontend.Infrastructure.Repository;
 
 public class PhotoRepository : IPhotoRepository
 {
-    private List<PhotoEntity> _photos = new()
+    private List<Photo> _photos = new()
     {
         new()
         {
@@ -20,21 +20,21 @@ public class PhotoRepository : IPhotoRepository
         }
     };
 
-    public Task<List<PhotoEntity>> GetPhotoList()
+    public Task<List<Photo>> GetPhotoList()
     {
         return Task.FromResult(_photos);
     }
 
-    public Task<PhotoEntity> AddPhoto(PhotoEntity photo)
+    public Task<Photo> AddPhoto(Photo photo)
     {
         photo.Id = _photos.Max(p => p.Id) + 1;
         _photos.Add(photo);
         return Task.FromResult(photo);
     }
 
-    public Task<PhotoEntity> UpdatePhoto(PhotoEntity photo)
+    public Task<Photo> UpdatePhoto(Photo photo)
     {
-        PhotoEntity? existingPhoto = _photos.SingleOrDefault(p => p.Id == photo.Id);
+        Photo? existingPhoto = _photos.SingleOrDefault(p => p.Id == photo.Id);
         if (existingPhoto is null)
         {
             throw new ArgumentException("No photo to update.");
@@ -45,9 +45,9 @@ public class PhotoRepository : IPhotoRepository
         return Task.FromResult(photo);
     }
 
-    public Task<PhotoEntity> FindById(int id)
+    public Task<Photo> FindById(int id)
     {
-        PhotoEntity? photo = _photos.SingleOrDefault(p => p.Id == id);
+        Photo? photo = _photos.SingleOrDefault(p => p.Id == id);
         if (photo is null)
         {
             throw new ArgumentException("Photo not found");
@@ -55,7 +55,7 @@ public class PhotoRepository : IPhotoRepository
         return Task.FromResult(photo);
     }
 
-    public Task DeletePhoto(PhotoEntity photo)
+    public Task DeletePhoto(Photo photo)
     {
         _photos.Remove(photo);
         return Task.CompletedTask;

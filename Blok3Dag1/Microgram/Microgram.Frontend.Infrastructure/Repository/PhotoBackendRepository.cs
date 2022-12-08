@@ -1,7 +1,7 @@
-using Microgram.Frontend.Core.Entities;
-using Microgram.Frontend.Core.Repository;
 using Flurl;
 using Flurl.Http;
+using Microgram.Shared.Core.Entities;
+using Microgram.Shared.Core.Repository;
 
 namespace Microgram.Frontend.Infrastructure.Repository;
 
@@ -14,20 +14,20 @@ public class PhotoBackendRepository : IPhotoRepository
         _baseUrl = baseUrl;
     }
 
-    public async Task<List<PhotoEntity>> GetPhotoList()
+    public async Task<List<Photo>> GetPhotoList()
     {
         var result = await _baseUrl
             .AppendPathSegment("photo")
-            .GetJsonAsync<List<PhotoEntity>>();
-        return result ?? new List<PhotoEntity>();
+            .GetJsonAsync<List<Photo>>();
+        return result ?? new List<Photo>();
     }
 
-    public async Task<PhotoEntity> AddPhoto(PhotoEntity photo)
+    public async Task<Photo> AddPhoto(Photo photo)
     {
         var result = await _baseUrl
             .AppendPathSegment("photo")
             .PostJsonAsync(photo)
-            .ReceiveJson<PhotoEntity>();
+            .ReceiveJson<Photo>();
         if (result is null)
         {
             throw new ArgumentException("Photo is not added.");
@@ -35,13 +35,13 @@ public class PhotoBackendRepository : IPhotoRepository
         return result;
     }
 
-    public async Task<PhotoEntity> UpdatePhoto(PhotoEntity photo)
+    public async Task<Photo> UpdatePhoto(Photo photo)
     {
         var result = await _baseUrl
             .AppendPathSegment("photo")
             .AppendPathSegment(photo.Id)
             .PatchJsonAsync(photo)
-            .ReceiveJson<PhotoEntity>();
+            .ReceiveJson<Photo>();
         if (result is null)
         {
             throw new ArgumentException("Photo is not updated.");
@@ -49,12 +49,12 @@ public class PhotoBackendRepository : IPhotoRepository
         return result;
     }
 
-    public async Task<PhotoEntity> FindById(int id)
+    public async Task<Photo> FindById(int id)
     {
         var result = await _baseUrl
             .AppendPathSegment("photo")
             .AppendPathSegment(id)
-            .GetJsonAsync<PhotoEntity>();
+            .GetJsonAsync<Photo>();
         if (result is null)
         {
             throw new ArgumentException("Photo is not added.");
@@ -62,7 +62,7 @@ public class PhotoBackendRepository : IPhotoRepository
         return result;
     }
 
-    public async Task DeletePhoto(PhotoEntity photo)
+    public async Task DeletePhoto(Photo photo)
     {
         var result = await _baseUrl
             .AppendPathSegment("photo")

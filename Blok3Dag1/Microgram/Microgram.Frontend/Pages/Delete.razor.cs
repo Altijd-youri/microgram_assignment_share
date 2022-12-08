@@ -1,9 +1,9 @@
-using Microgram.Frontend.Core.Entities;
-using Microgram.Frontend.Core.Repository;
+using Microgram.Shared.Core.Entities;
+using Microgram.Shared.Core.Repository;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace Microgram.Frontend.Pages.Photo;
+namespace Microgram.Frontend.Pages;
 
 public partial class Delete
 {
@@ -13,7 +13,7 @@ public partial class Delete
     [Parameter]
     public string Id { get; set; }
 
-    private PhotoEntity _photo = new();
+    private Photo _photo = new();
 
     protected override async Task OnInitializedAsync()
     {
