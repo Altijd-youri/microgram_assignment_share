@@ -12,6 +12,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddMudServices();
 
-builder.Services.AddSingleton<IPhotoRepository>(new PhotoBackendRepository("https://localhost:7222"));
+builder.Services.AddSingleton<IPhotoRepository>(new PhotoBackendRepository("https://localhost:7012/api"));
 
 await builder.Build().RunAsync();

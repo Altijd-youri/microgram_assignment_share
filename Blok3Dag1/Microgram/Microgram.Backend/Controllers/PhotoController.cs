@@ -1,11 +1,10 @@
+using Microgram.Backend.Core.Enitities;
 using Microgram.Backend.Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
-using PhotoEntity = Microgram.Backend.Core.Enitities.PhotoEntity;
 
 namespace Microgram.Backend.Controllers;
 
 [ApiController]
-[Route("/api")]
 public class PhotoController : ControllerBase
 {
     private IPhotoRepository _photoRepository;
@@ -15,13 +14,13 @@ public class PhotoController : ControllerBase
         _photoRepository = photoRepository;
     }
     
-    [HttpGet("/photo")]
+    [HttpGet("/api/photo")]
     public async Task<ActionResult<IEnumerable<PhotoEntity>>> GetPhotoList()
     {
         return Ok(await _photoRepository.GetPhotoList());
     }
     
-    [HttpGet("/photo/{id}")]
+    [HttpGet("/api/photo/{id}")]
     public async Task<ActionResult<PhotoEntity>> GetPhotoById([FromRoute] string id)
     {
         if (Int32.TryParse(id, out var parsedId))
@@ -39,7 +38,7 @@ public class PhotoController : ControllerBase
         
     }
     
-    [HttpDelete("/photo/{id}")]
+    [HttpDelete("/api/photo/{id}")]
     public async Task<ActionResult> DeletePhotoById([FromRoute] string id)
     {
         int parsedId;
@@ -61,7 +60,7 @@ public class PhotoController : ControllerBase
         
     }
     
-    [HttpPatch("/photo")]
+    [HttpPatch("/api/photo")]
     public async Task<ActionResult<PhotoEntity>> PatchPhoto([FromBody] PhotoEntity photo)
     {
         if (ModelState.IsValid)
@@ -80,7 +79,7 @@ public class PhotoController : ControllerBase
         return BadRequest();
     }
     
-    [HttpPost("/photo")]
+    [HttpPost("/api/photo")]
     public async Task<ActionResult<PhotoEntity>> PostPhoto([FromBody] PhotoEntity photo)
     {
         if (ModelState.IsValid)

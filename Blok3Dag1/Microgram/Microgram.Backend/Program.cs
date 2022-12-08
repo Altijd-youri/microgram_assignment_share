@@ -8,7 +8,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("MicrogramFrontend", policy =>
+    options.AddPolicy("MicrogramMiddle", policy =>
     {
         policy.WithOrigins("https://localhost:7287")
             .AllowCredentials()
@@ -28,9 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.UseCors("MicrogramFrontend");
+app.UseCors("MicrogramMiddle");
 
 app.UseAuthorization();
 

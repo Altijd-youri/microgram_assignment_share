@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microgram.Backend.Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microgram.Backend.Core", "Microgram.Backend.Core\Microgram.Backend.Core.csproj", "{B631F2A5-6841-456F-B2A0-0DE97F6A5BEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microgram.Middle", "Microgram.Middle\Microgram.Middle.csproj", "{EBBF6EFC-3E9F-446A-BDD2-BC966DE3F218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{B631F2A5-6841-456F-B2A0-0DE97F6A5BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B631F2A5-6841-456F-B2A0-0DE97F6A5BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B631F2A5-6841-456F-B2A0-0DE97F6A5BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBBF6EFC-3E9F-446A-BDD2-BC966DE3F218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBBF6EFC-3E9F-446A-BDD2-BC966DE3F218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBBF6EFC-3E9F-446A-BDD2-BC966DE3F218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBBF6EFC-3E9F-446A-BDD2-BC966DE3F218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

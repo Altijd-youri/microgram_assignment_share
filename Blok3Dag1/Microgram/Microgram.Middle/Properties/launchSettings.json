@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Microgram.Middle": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7012;http://localhost:5021",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
