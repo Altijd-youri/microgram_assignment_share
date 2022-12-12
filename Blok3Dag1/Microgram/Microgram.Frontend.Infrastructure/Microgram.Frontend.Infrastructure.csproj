@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Microgram.Frontend.Core\Microgram.Frontend.Core.csproj" />
       <ProjectReference Include="..\Microgram.Shared.Core\Microgram.Shared.Core.csproj" />
     </ItemGroup>
 

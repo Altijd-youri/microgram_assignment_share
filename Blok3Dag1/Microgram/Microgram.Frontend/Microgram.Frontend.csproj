@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Microgram.Frontend.Core\Microgram.Frontend.Core.csproj" />
       <ProjectReference Include="..\Microgram.Frontend.Infrastructure\Microgram.Frontend.Infrastructure.csproj" />
     </ItemGroup>
 
